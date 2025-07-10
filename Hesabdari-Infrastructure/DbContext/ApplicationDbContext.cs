@@ -22,15 +22,15 @@ namespace Hesabdari_Infrastructure.DbContext
    base.OnModelCreating(modelBuilder);
 
    modelBuilder.Entity<Booking>().ToTable("Bookings");
-   modelBuilder.Entity<Cabin>().ToTable("Cabins");
+   modelBuilder.Entity<HeroSlide>().ToTable("HeroSlides");
    modelBuilder.Entity<Guest>().ToTable("Guests");
    modelBuilder.Entity<Setting>().ToTable("Setting");
    
    modelBuilder.Entity<Booking>(entity =>
    {
-    entity.HasOne(b => b.Cabin)
+    entity.HasOne(b => b.HeroSlide)
      .WithMany()
-     .HasForeignKey(b => b.CabinId) ;
+     .HasForeignKey(b => b.HeroSlideId) ;
    });
    
    modelBuilder.Entity<Booking>(entity =>

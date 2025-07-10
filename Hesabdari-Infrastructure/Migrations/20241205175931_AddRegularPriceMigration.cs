@@ -12,7 +12,7 @@ namespace Hesabdari_Infrastructure.Migrations
         {
             migrationBuilder.AddColumn<int>(
                 name: "RegularPrice",
-                table: "Cabins",
+                table: "HeroSlides",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
@@ -23,7 +23,7 @@ namespace Hesabdari_Infrastructure.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "RegularPrice",
-                table: "Cabins");
+                table: "HeroSlides");
         }
     }
 }

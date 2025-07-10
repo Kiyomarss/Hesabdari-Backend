@@ -12,11 +12,11 @@ namespace Hesabdari_Infrastructure.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Image",
-                table: "Cabins");
+                table: "HeroSlides");
 
             migrationBuilder.AddColumn<string>(
                 name: "ImagePath",
-                table: "Cabins",
+                table: "HeroSlides",
                 type: "nvarchar(max)",
                 nullable: true);
         }
@@ -26,11 +26,11 @@ namespace Hesabdari_Infrastructure.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "ImagePath",
-                table: "Cabins");
+                table: "HeroSlides");
 
             migrationBuilder.AddColumn<byte[]>(
                 name: "Image",
-                table: "Cabins",
+                table: "HeroSlides",
                 type: "varbinary(max)",
                 nullable: false,
                 defaultValue: new byte[0]);

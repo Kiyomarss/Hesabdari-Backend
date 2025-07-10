@@ -52,7 +52,7 @@ namespace Hesabdari_Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cabins",
+                name: "HeroSlides",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -65,7 +65,7 @@ namespace Hesabdari_Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cabins", x => x.Id);
+                    table.PrimaryKey("PK_HeroSlides", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,14 +216,14 @@ namespace Hesabdari_Infrastructure.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NumNights = table.Column<int>(type: "int", nullable: false),
                     NumGuests = table.Column<int>(type: "int", nullable: false),
-                    CabinPrice = table.Column<int>(type: "int", nullable: false),
+                    HeroSlidePrice = table.Column<int>(type: "int", nullable: false),
                     ExtrasPrice = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HasBreakfast = table.Column<bool>(type: "bit", nullable: false),
                     IsPaid = table.Column<bool>(type: "bit", nullable: false),
                     Observations = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CabinId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    HeroSlideId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     GuestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -231,9 +231,9 @@ namespace Hesabdari_Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Bookings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bookings_Cabins_CabinId",
-                        column: x => x.CabinId,
-                        principalTable: "Cabins",
+                        name: "FK_Bookings_HeroSlides_HeroSlideId",
+                        column: x => x.HeroSlideId,
+                        principalTable: "HeroSlides",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
@@ -284,9 +284,9 @@ namespace Hesabdari_Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_CabinId",
+                name: "IX_Bookings_HeroSlideId",
                 table: "Bookings",
-                column: "CabinId");
+                column: "HeroSlideId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_GuestId",
@@ -325,7 +325,7 @@ namespace Hesabdari_Infrastructure.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Cabins");
+                name: "HeroSlides");
 
             migrationBuilder.DropTable(
                 name: "Guests");

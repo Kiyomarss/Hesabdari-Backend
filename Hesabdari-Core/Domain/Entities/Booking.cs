@@ -17,7 +17,7 @@ public class Booking
     
     public int NumGuests { get; set; }
     
-    public int CabinPrice { get; set; }
+    public int HeroSlidePrice { get; set; }
     
     public int ExtrasPrice { get; set; }
     
@@ -31,10 +31,10 @@ public class Booking
     
     public string Observations { get; set; }
     
-    public Guid CabinId { get; set; }
+    public Guid HeroSlideId { get; set; }
 
-    [ForeignKey("CabinId")]
-    public virtual Cabin Cabin { get; set; }
+    [ForeignKey("HeroSlideId")]
+    public virtual HeroSlide HeroSlide { get; set; }
     
     public Guid GuestId { get; set; }
 

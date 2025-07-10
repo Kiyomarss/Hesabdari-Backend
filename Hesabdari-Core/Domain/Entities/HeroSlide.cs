@@ -3,7 +3,7 @@ using Hesabdari_Core.Domain.Entities;
 
 namespace Entities;
 
-public class Cabin
+public class HeroSlide
 {
     [Key]
     public Guid Id { get; set; }

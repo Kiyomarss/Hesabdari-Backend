@@ -122,7 +122,7 @@ namespace Hesabdari_Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Cabin", b =>
+            modelBuilder.Entity("Entities.HeroSlide", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -154,7 +154,7 @@ namespace Hesabdari_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cabins", (string)null);
+                    b.ToTable("HeroSlides", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Guest", b =>
@@ -223,10 +223,10 @@ namespace Hesabdari_Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CabinId")
+                    b.Property<Guid>("HeroSlideId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CabinPrice")
+                    b.Property<int>("HeroSlidePrice")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateAt")
@@ -269,7 +269,7 @@ namespace Hesabdari_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CabinId");
+                    b.HasIndex("HeroSlideId");
 
                     b.HasIndex("GuestId");
 
@@ -381,9 +381,9 @@ namespace Hesabdari_Infrastructure.Migrations
 
             modelBuilder.Entity("Hesabdari_Core.Domain.Entities.Booking", b =>
                 {
-                    b.HasOne("Entities.Cabin", "Cabin")
+                    b.HasOne("Entities.HeroSlide", "HeroSlide")
                         .WithMany("Bookings")
-                        .HasForeignKey("CabinId")
+                        .HasForeignKey("HeroSlideId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -393,7 +393,7 @@ namespace Hesabdari_Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cabin");
+                    b.Navigation("HeroSlide");
 
                     b.Navigation("Guest");
                 });
@@ -449,7 +449,7 @@ namespace Hesabdari_Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entities.Cabin", b =>
+            modelBuilder.Entity("Entities.HeroSlide", b =>
                 {
                     b.Navigation("Bookings");
                 });

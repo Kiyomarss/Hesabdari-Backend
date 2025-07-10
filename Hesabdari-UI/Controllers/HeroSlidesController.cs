@@ -6,23 +6,23 @@ using ServiceContracts;
 
 namespace Hesabdari_UI.Controllers;
 
-public class CabinsController  : BaseController
+public class HeroSlidesController  : BaseController
 {
-    private readonly ICabinsDeleterService _cabinsDeleterService;
-    private readonly ICabinsGetterService _cabinsGetterService;
-    private readonly ICabinsAdderService _cabinsAdderService;
-    private readonly ICabinsUpdaterService _cabinsUpdaterService;
+    private readonly IHeroSlidesDeleterService _heroSlidesDeleterService;
+    private readonly IHeroSlidesGetterService _heroSlidesGetterService;
+    private readonly IHeroSlidesAdderService _heroSlidesAdderService;
+    private readonly IHeroSlidesUpdaterService _heroSlidesUpdaterService;
 
-    public CabinsController(ICabinsDeleterService cabinsDeleterService, ICabinsGetterService cabinsGetterService, ICabinsAdderService cabinsAdderService, ICabinsUpdaterService cabinsUpdaterService)
+    public HeroSlidesController(IHeroSlidesDeleterService heroSlidesDeleterService, IHeroSlidesGetterService heroSlidesGetterService, IHeroSlidesAdderService heroSlidesAdderService, IHeroSlidesUpdaterService heroSlidesUpdaterService)
     {
-        _cabinsDeleterService = cabinsDeleterService;
-        _cabinsGetterService = cabinsGetterService;
-        _cabinsAdderService = cabinsAdderService;
-        _cabinsUpdaterService = cabinsUpdaterService;
+        _heroSlidesDeleterService = heroSlidesDeleterService;
+        _heroSlidesGetterService = heroSlidesGetterService;
+        _heroSlidesAdderService = heroSlidesAdderService;
+        _heroSlidesUpdaterService = heroSlidesUpdaterService;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CabinUpsertRequest dto)
+    public async Task<IActionResult> Create(HeroSlideUpsertRequest dto)
     {
         if (dto.Image is { Length: > 0 })
         {
@@ -37,22 +37,22 @@ public class CabinsController  : BaseController
             dto.ImagePath = await SaveNewImageAsync(dto.Image);
         }
 
-        var cabinResponse = await _cabinsAdderService.AddCabin(dto);
+        var heroSlideResponse = await _heroSlidesAdderService.AddHeroSlide(dto);
 
         return Ok(new
         {
-            Message = "Cabin created successfully",
-            Cabin = cabinResponse
+            Message = "HeroSlide created successfully",
+            HeroSlide = heroSlideResponse
         });
     }
 
     [HttpPut]
-    public async Task<IActionResult> Edit(CabinUpsertRequest dto)
+    public async Task<IActionResult> Edit(HeroSlideUpsertRequest dto)
     {
-        CabinResponse? existingCabin = await _cabinsGetterService.GetCabinByCabinId(dto.Id);
-        if (existingCabin == null)
+        HeroSlideResponse? existingHeroSlide = await _heroSlidesGetterService.GetHeroSlideByHeroSlideId(dto.Id);
+        if (existingHeroSlide == null)
         {
-            return NotFound(new { Message = "Cabin not found" });
+            return NotFound(new { Message = "HeroSlide not found" });
         }
 
         if (dto.Image is { Length: > 0 })
@@ -64,22 +64,22 @@ public class CabinsController  : BaseController
                 return BadRequest(new { Message = "Invalid file type. Only images are allowed." });
             }
 
-            DeleteOldImage(existingCabin.ImagePath);
+            DeleteOldImage(existingHeroSlide.ImagePath);
 
             dto.ImagePath = await SaveNewImageAsync(dto.Image);
         }
         else
         {
             // اگر تصویر جدید آپلود نشده، تصویر قبلی حفظ شود
-            dto.ImagePath = existingCabin.ImagePath;
+            dto.ImagePath = existingHeroSlide.ImagePath;
         }
 
-        CabinResponse updatedCabin = await _cabinsUpdaterService.UpdateCabin(dto);
+        HeroSlideResponse updatedHeroSlide = await _heroSlidesUpdaterService.UpdateHeroSlide(dto);
 
         return Ok(new
         {
-            Message = "Cabin updated successfully",
-            Cabin = updatedCabin
+            Message = "HeroSlide updated successfully",
+            HeroSlide = updatedHeroSlide
         });
     }
 
@@ -116,16 +116,16 @@ public class CabinsController  : BaseController
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetCabins()
+    public async Task<IActionResult> GetHeroSlides()
     {
-        var cabins = await _cabinsGetterService.GetCabins();
-        return Ok(new { Cabins = cabins });
+        var heroSlides = await _heroSlidesGetterService.GetHeroSlides();
+        return Ok(new { HeroSlides = heroSlides });
     }
     
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var deleteCabin = await _cabinsDeleterService.DeleteCabin(id);
-        return Ok(new { isDeleted = deleteCabin });
+        var deleteHeroSlide = await _heroSlidesDeleterService.DeleteHeroSlide(id);
+        return Ok(new { isDeleted = deleteHeroSlide });
     }
 }

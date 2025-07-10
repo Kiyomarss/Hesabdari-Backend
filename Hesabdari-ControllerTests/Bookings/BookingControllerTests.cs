@@ -160,7 +160,7 @@ public class BookingsControllerTests
         Assert.NotNull(response);
         Assert.Equal(bookingResponse.Status, response.Status);
         Assert.Equal(bookingResponse.TotalPrice, response.TotalPrice);
-        Assert.Equal(bookingResponse.CabinName, response.CabinName);
+        Assert.Equal(bookingResponse.HeroSlideName, response.HeroSlideName);
         Assert.Equal(bookingResponse.CountryFlag, response.CountryFlag);
         Assert.Equal(bookingResponse.Nationality, response.Nationality);
     }

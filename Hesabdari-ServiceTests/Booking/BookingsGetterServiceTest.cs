@@ -162,7 +162,7 @@ namespace Hesabdari_ServiceTests
                                   .With(b => b.Id, bookingId)
                                   .With(b => b.Status, "Confirmed")
                                   .With(b => b.TotalPrice, 200)
-                                  .With(b => b.Cabin, new Cabin { Name = "Deluxe Suite" })
+                                  .With(b => b.HeroSlide, new HeroSlide { Name = "Deluxe Suite" })
                                   .With(b => b.Guest, new Guest { CountryFlag = "🇫🇷", Nationality = "French" })
                                   .Create();
 
@@ -176,7 +176,7 @@ namespace Hesabdari_ServiceTests
             Assert.NotNull(result);
             Assert.Equal(booking.Status, result.Status);
             Assert.Equal(booking.TotalPrice, result.TotalPrice);
-            Assert.Equal(booking.Cabin.Name, result.CabinName);
+            Assert.Equal(booking.HeroSlide.Name, result.HeroSlideName);
             Assert.Equal(booking.Guest.CountryFlag, result.CountryFlag);
             Assert.Equal(booking.Guest.Nationality, result.Nationality);
         }

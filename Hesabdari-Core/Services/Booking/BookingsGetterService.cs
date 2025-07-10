@@ -26,7 +26,7 @@ namespace Services
 
    return new PaginatedResult<BookingsItemResult>
    {
-    Items = paginatedResult.Items.Select(s => new BookingsItemResult(s.Id, s.Status, s.TotalPrice, s.NumNights, s.NumGuests, s.Cabin.Name, s.Guest.FullName, s.Guest.Email, s.Guest.CountryFlag, s.StartDate.ToString(), s.EndDate.ToString(), s.CreateAt.ToString("yyyy-MM-dd"))).ToList(),
+    Items = paginatedResult.Items.Select(s => new BookingsItemResult(s.Id, s.Status, s.TotalPrice, s.NumNights, s.NumGuests, s.HeroSlide.Name, s.Guest.FullName, s.Guest.Email, s.Guest.CountryFlag, s.StartDate.ToString(), s.EndDate.ToString(), s.CreateAt.ToString("yyyy-MM-dd"))).ToList(),
     TotalCount = paginatedResult.TotalCount
    };
   }
@@ -59,7 +59,7 @@ namespace Services
    if (booking == null)
     throw new ArgumentException("Given Booking id doesn't exist");
 
-   return new BookingResult(booking.Id, booking.Status, booking.TotalPrice, booking.Cabin.Name, booking.Guest.CountryFlag, booking.Guest.Nationality);
+   return new BookingResult(booking.Id, booking.Status, booking.TotalPrice, booking.HeroSlide.Name, booking.Guest.CountryFlag, booking.Guest.Nationality);
   }
   
   public virtual async Task<Booking?> FindBookingById(Guid bookingId)

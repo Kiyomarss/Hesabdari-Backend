@@ -15,7 +15,7 @@ public class BookingUpsertRequest
     
     public int NumGuests { get; set; }
     
-    public int CabinPrice { get; set; }
+    public int HeroSlidePrice { get; set; }
     
     public int ExtrasPrice { get; set; }
     
@@ -29,7 +29,7 @@ public class BookingUpsertRequest
     
     public string Observations { get; set; }
     
-    public Guid CabinId { get; set; }
+    public Guid HeroSlideId { get; set; }
     
     public Guid GuestId { get; set; }
 
@@ -43,14 +43,14 @@ public class BookingUpsertRequest
             EndDate = EndDate,
             NumNights = NumNights,
             NumGuests = NumGuests,
-            CabinPrice = CabinPrice,
+            HeroSlidePrice = HeroSlidePrice,
             ExtrasPrice = ExtrasPrice,
             TotalPrice = TotalPrice,
             Status = Status,
             HasBreakfast = HasBreakfast,
             IsPaid = IsPaid,
             Observations = Observations,
-            CabinId = CabinId,
+            HeroSlideId = HeroSlideId,
             GuestId = GuestId,
             CreateAt = CreateAt,
         };

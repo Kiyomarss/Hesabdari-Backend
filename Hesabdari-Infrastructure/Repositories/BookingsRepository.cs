@@ -29,7 +29,7 @@ namespace Hesabdari_Infrastructure.Repositories
             if (booking == null) return null;
 
             await _db.Entry(booking).Reference(b => b.Guest).LoadAsync();
-            await _db.Entry(booking).Reference(b => b.Cabin).LoadAsync();
+            await _db.Entry(booking).Reference(b => b.HeroSlide).LoadAsync();
 
             return booking;
         }
@@ -70,7 +70,7 @@ namespace Hesabdari_Infrastructure.Repositories
             foreach (var booking in bookings)
             {
                 await _db.Entry(booking).Reference(b => b.Guest).LoadAsync();
-                await _db.Entry(booking).Reference(b => b.Cabin).LoadAsync();
+                await _db.Entry(booking).Reference(b => b.HeroSlide).LoadAsync();
             }
             
             return new PaginatedResult<Booking>

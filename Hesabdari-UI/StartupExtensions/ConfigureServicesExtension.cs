@@ -46,11 +46,11 @@ namespace Hesabdari_UI
    services.AddScoped<IBookingsDeleterService, BookingsDeleterService>();
    services.AddScoped<IBookingsUpdaterService, BookingsUpdaterService>();
 
-   services.AddScoped<ICabinsRepository, CabinsRepository>();
-   services.AddScoped<ICabinsGetterService, CabinsGetterService>();
-   services.AddScoped<ICabinsDeleterService, CabinsDeleterService>();
-   services.AddScoped<ICabinsUpdaterService, CabinsUpdaterService>();
-   services.AddScoped<ICabinsAdderService, CabinsAdderService>();
+   services.AddScoped<IHeroSlidesRepository, HeroSlidesRepository>();
+   services.AddScoped<IHeroSlidesGetterService, HeroSlidesGetterService>();
+   services.AddScoped<IHeroSlidesDeleterService, HeroSlidesDeleterService>();
+   services.AddScoped<IHeroSlidesUpdaterService, HeroSlidesUpdaterService>();
+   services.AddScoped<IHeroSlidesAdderService, HeroSlidesAdderService>();
    
    services.AddScoped<ISettingRepository, SettingRepository>();
    services.AddScoped<ISettingGetterService, SettingGetterService>();

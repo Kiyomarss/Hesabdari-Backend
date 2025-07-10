@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Hesabdari_Core.DTO;
 
-public class CabinUpsertRequest
+public class HeroSlideUpsertRequest
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
@@ -20,9 +20,9 @@ public class CabinUpsertRequest
     
     public string? ImagePath { get; set; }
 
-    public Cabin ToCabin()
+    public HeroSlide ToHeroSlide()
     {
-        return new Cabin
+        return new HeroSlide
         {
             Name = Name,
             MaxCapacity = MaxCapacity,
