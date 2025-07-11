@@ -15,6 +15,7 @@ namespace Hesabdari_Infrastructure.DbContext
   
   public DatabaseFacade Database => base.Database;
   
+  //TODO: خطوط زیر نباید حذف شود زیر اجرای مایگریشن به مشکل می‌خورد
   public DbSet<HeroSlide> HeroSlides { get; set; }
   public DbSet<Booking> Bookings { get; set; }
   public DbSet<Guest> Guests { get; set; }
