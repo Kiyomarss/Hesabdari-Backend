@@ -31,11 +31,6 @@ public class Booking
     
     public string Observations { get; set; }
     
-    public Guid HeroSlideId { get; set; }
-
-    [ForeignKey("HeroSlideId")]
-    public virtual HeroSlide HeroSlide { get; set; }
-    
     public Guid GuestId { get; set; }
 
     [ForeignKey("GuestId")]

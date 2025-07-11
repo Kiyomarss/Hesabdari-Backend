@@ -2,6 +2,6 @@
 {
  public interface IHeroSlidesDeleterService
  {
-  Task<bool> DeleteHeroSlide(Guid heroSlideId);
+  Task<bool> DeleteHeroSlide(int heroSlideId);
  }
 }

@@ -28,12 +28,12 @@ namespace Repositories
             return await _db.Set<HeroSlide>().ToListAsync();
         }
         
-        public async Task<HeroSlide?> FindHeroSlideById(Guid heroSlideId)
+        public async Task<HeroSlide?> FindHeroSlideById(int heroSlideId)
         {
             return await _db.Set<HeroSlide>().FindAsync(heroSlideId);
         }
 
-        public async Task<bool> DeleteHeroSlide(Guid heroSlideId)
+        public async Task<bool> DeleteHeroSlide(int heroSlideId)
         {
             var rowsDeleted = await _db.Set<HeroSlide>()
                                        .Where(b => b.Id == heroSlideId)
@@ -50,12 +50,13 @@ namespace Repositories
                 throw new InvalidOperationException("HeroSlide with the given ID does not exist.");
             }
             
-            matchingHeroSlide.Name = heroSlideUpdateRequest.Name;
-            matchingHeroSlide.MaxCapacity = heroSlideUpdateRequest.MaxCapacity;
-            matchingHeroSlide.RegularPrice = heroSlideUpdateRequest.RegularPrice;
-            matchingHeroSlide.Discount = heroSlideUpdateRequest.Discount;
-            matchingHeroSlide.ImagePath = heroSlideUpdateRequest.ImagePath;
-            matchingHeroSlide.Description = heroSlideUpdateRequest.Description;
+            matchingHeroSlide.Title = heroSlideUpdateRequest.Title;
+            matchingHeroSlide.Link = heroSlideUpdateRequest.Link;
+            matchingHeroSlide.Order = heroSlideUpdateRequest.Order;
+            matchingHeroSlide.IsActive = heroSlideUpdateRequest.IsActive;
+            matchingHeroSlide.ImageUrl = heroSlideUpdateRequest.ImageUrl;
+            matchingHeroSlide.StartDate = heroSlideUpdateRequest.StartDate;
+            matchingHeroSlide.EndDate = heroSlideUpdateRequest.EndDate;
             
             return matchingHeroSlide;
         }

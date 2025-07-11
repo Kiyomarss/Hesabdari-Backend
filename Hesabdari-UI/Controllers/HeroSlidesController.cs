@@ -34,7 +34,7 @@ public class HeroSlidesController  : BaseController
                 return BadRequest(new { Message = "Invalid file type. Only images are allowed." });
             }
 
-            dto.ImagePath = await SaveNewImageAsync(dto.Image);
+            dto.ImageUrl = await SaveNewImageAsync(dto.Image);
         }
 
         var heroSlideResponse = await _heroSlidesAdderService.AddHeroSlide(dto);
@@ -64,14 +64,14 @@ public class HeroSlidesController  : BaseController
                 return BadRequest(new { Message = "Invalid file type. Only images are allowed." });
             }
 
-            DeleteOldImage(existingHeroSlide.ImagePath);
+            DeleteOldImage(existingHeroSlide.ImageUrl);
 
-            dto.ImagePath = await SaveNewImageAsync(dto.Image);
+            dto.ImageUrl = await SaveNewImageAsync(dto.Image);
         }
         else
         {
             // اگر تصویر جدید آپلود نشده، تصویر قبلی حفظ شود
-            dto.ImagePath = existingHeroSlide.ImagePath;
+            dto.ImageUrl = existingHeroSlide.ImageUrl;
         }
 
         HeroSlideResponse updatedHeroSlide = await _heroSlidesUpdaterService.UpdateHeroSlide(dto);
@@ -123,7 +123,7 @@ public class HeroSlidesController  : BaseController
     }
     
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(int id)
     {
         var deleteHeroSlide = await _heroSlidesDeleterService.DeleteHeroSlide(id);
         return Ok(new { isDeleted = deleteHeroSlide });

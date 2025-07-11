@@ -5,31 +5,34 @@ namespace Hesabdari_Core.DTO;
 
 public class HeroSlideUpsertRequest
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
+    public int Id { get; set; }
     
-    public int MaxCapacity { get; set; }
+    public string Title { get; set; }
     
-    public int RegularPrice { get; set; }
+    public string Link { get; set; }
     
-    public int Discount { get; set; }
+    public int Order { get; set; }
     
-    public string Description { get; set; }
+    public bool IsActive { get; set; }
+    
+    public DateTime? StartDate { get; set; }
+        
+    public DateTime? EndDate { get; set; }
     
     public IFormFile?  Image { get; set; }
     
-    public string? ImagePath { get; set; }
+    public string? ImageUrl { get; set; }
 
     public HeroSlide ToHeroSlide()
     {
         return new HeroSlide
         {
-            Name = Name,
-            MaxCapacity = MaxCapacity,
-            RegularPrice = RegularPrice,
-            Discount = Discount,
-            Description = Description,
-            ImagePath = ImagePath
+            Title = Title,
+            Link = Link,
+            Order = Order,
+            IsActive = IsActive,
+            StartDate = StartDate,
+            ImageUrl = ImageUrl
         };
     }
 }

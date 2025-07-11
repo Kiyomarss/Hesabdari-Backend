@@ -28,13 +28,6 @@ namespace Hesabdari_Infrastructure.DbContext
    
    modelBuilder.Entity<Booking>(entity =>
    {
-    entity.HasOne(b => b.HeroSlide)
-     .WithMany()
-     .HasForeignKey(b => b.HeroSlideId) ;
-   });
-   
-   modelBuilder.Entity<Booking>(entity =>
-   {
     entity.HasOne(b => b.Guest)
      .WithMany()
      .HasForeignKey(b => b.GuestId);

@@ -29,8 +29,7 @@ public class BookingUpsertRequest
     
     public string Observations { get; set; }
     
-    public Guid HeroSlideId { get; set; }
-    
+   
     public Guid GuestId { get; set; }
 
     public DateTime CreateAt { get; set; }
@@ -50,7 +49,6 @@ public class BookingUpsertRequest
             HasBreakfast = HasBreakfast,
             IsPaid = IsPaid,
             Observations = Observations,
-            HeroSlideId = HeroSlideId,
             GuestId = GuestId,
             CreateAt = CreateAt,
         };

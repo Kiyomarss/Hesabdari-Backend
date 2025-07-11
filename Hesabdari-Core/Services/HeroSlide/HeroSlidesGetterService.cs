@@ -19,7 +19,7 @@ namespace Services
    _logger = logger;
   }
   
-  public virtual async Task<HeroSlideResponse?> GetHeroSlideByHeroSlideId(Guid heroSlideId)
+  public virtual async Task<HeroSlideResponse?> GetHeroSlideByHeroSlideId(int heroSlideId)
   {
    var heroSlide = await _heroSlidesRepository.FindHeroSlideById(heroSlideId);
 

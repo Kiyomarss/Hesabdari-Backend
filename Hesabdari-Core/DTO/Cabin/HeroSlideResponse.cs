@@ -4,19 +4,21 @@ namespace Hesabdari_Core.DTO;
 
 public class HeroSlideResponse
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     
-    public string Name { get; set; }
+    public string Title { get; set; }
     
-    public int MaxCapacity { get; set; }
+    public string ImageUrl { get; set; }
     
-    public int RegularPrice { get; set; }
+    public string Link { get; set; }
     
-    public int Discount { get; set; }
+    public int Order { get; set; }
     
-    public string Description { get; set; }
+    public bool IsActive { get; set; }
     
-    public string? ImagePath { get; set; }
+    public DateTime? StartDate { get; set; }
+    
+    public DateTime? EndDate { get; set; }
     
     public DateTime CreateAt { get; set; }
 }
@@ -29,12 +31,13 @@ public static class HeroSlideExtensions
         return new HeroSlideResponse()
         {
             Id = heroSlide.Id, 
-            Name = heroSlide.Name, 
-            MaxCapacity = heroSlide.MaxCapacity, 
-            RegularPrice = heroSlide.RegularPrice, 
-            Discount = heroSlide.Discount, 
-            ImagePath = heroSlide.ImagePath, 
-            Description = heroSlide.Description, 
+            Title = heroSlide.Title, 
+            Link = heroSlide.Link, 
+            Order = heroSlide.Order, 
+            IsActive = heroSlide.IsActive, 
+            ImageUrl = heroSlide.ImageUrl, 
+            StartDate = heroSlide.StartDate, 
+            EndDate = heroSlide.EndDate, 
             CreateAt = heroSlide.CreateAt
         };
     }

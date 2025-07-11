@@ -21,7 +21,7 @@ namespace Services
    _logger = logger;
   }
   
-  public async Task<bool> DeleteHeroSlide(Guid heroSlideId)
+  public async Task<bool> DeleteHeroSlide(int heroSlideId)
   {
    var heroSlide = await _heroSlidesRepository.FindHeroSlideById(heroSlideId);
    if (heroSlide == null)

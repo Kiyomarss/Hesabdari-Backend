@@ -29,11 +29,9 @@ namespace Hesabdari_Infrastructure.Repositories
             if (booking == null) return null;
 
             await _db.Entry(booking).Reference(b => b.Guest).LoadAsync();
-            await _db.Entry(booking).Reference(b => b.HeroSlide).LoadAsync();
 
             return booking;
         }
-
         
         public async Task<Booking?> FindBookingById(Guid bookingId)
         {
@@ -70,7 +68,6 @@ namespace Hesabdari_Infrastructure.Repositories
             foreach (var booking in bookings)
             {
                 await _db.Entry(booking).Reference(b => b.Guest).LoadAsync();
-                await _db.Entry(booking).Reference(b => b.HeroSlide).LoadAsync();
             }
             
             return new PaginatedResult<Booking>
