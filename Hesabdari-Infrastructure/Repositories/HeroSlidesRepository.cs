@@ -23,6 +23,26 @@ namespace Repositories
             return heroSlide;
         }
 
+        public Task<HeroSlide> UpdateHeroSlide(HeroSlide heroSlide)
+        {
+            _db.Set<HeroSlide>().Update(heroSlide);
+
+            return Task.FromResult(heroSlide);
+        }
+        
+        public async Task<List<string>> GetHeroSlidesImageUrl()
+        {
+            var today = DateTime.Now.Date;
+
+            return await _db.Set<HeroSlide>()
+                            .Where(b =>
+                                       b.IsActive &&
+                                       (b.StartDate == null || b.StartDate.Value.Date <= today) &&
+                                       (b.EndDate == null || b.EndDate.Value.Date >= today))
+                            .Select(x => x.ImageUrl)
+                            .ToListAsync();
+        }
+
         public async Task<List<HeroSlide>> GetHeroSlides()
         {
             return await _db.Set<HeroSlide>().ToListAsync();
@@ -40,25 +60,6 @@ namespace Repositories
                                        .ExecuteDeleteAsync();
 
             return rowsDeleted > 0;
-        }
-
-        public async Task<HeroSlide> UpdateHeroSlide(HeroSlideUpsertRequest heroSlideUpdateRequest)
-        {
-            var matchingHeroSlide = await _db.Set<HeroSlide>().FindAsync(heroSlideUpdateRequest.Id);
-            if (matchingHeroSlide == null)
-            {
-                throw new InvalidOperationException("HeroSlide with the given ID does not exist.");
-            }
-            
-            matchingHeroSlide.Title = heroSlideUpdateRequest.Title;
-            matchingHeroSlide.Link = heroSlideUpdateRequest.Link;
-            matchingHeroSlide.Order = heroSlideUpdateRequest.Order;
-            matchingHeroSlide.IsActive = heroSlideUpdateRequest.IsActive;
-            matchingHeroSlide.ImageUrl = heroSlideUpdateRequest.ImageUrl;
-            matchingHeroSlide.StartDate = heroSlideUpdateRequest.StartDate;
-            matchingHeroSlide.EndDate = heroSlideUpdateRequest.EndDate;
-            
-            return matchingHeroSlide;
         }
     }
 }

@@ -5,6 +5,6 @@ namespace ServiceContracts
 {
  public interface IHeroSlidesUpdaterService
  {
-  Task<HeroSlideResponse> UpdateHeroSlide(HeroSlideUpsertRequest heroSlideUpsertRequest);
+  Task UpdateHeroSlide(HeroSlideUpsertRequest heroSlideUpsertRequest);
  }
 }

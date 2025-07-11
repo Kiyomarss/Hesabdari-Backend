@@ -15,24 +15,13 @@ public class HeroSlideUpsertRequest
     
     public bool IsActive { get; set; }
     
-    public DateTime? StartDate { get; set; }
+    public string? StartDate { get; set; }
         
-    public DateTime? EndDate { get; set; }
+    public string? EndDate { get; set; }
     
     public IFormFile?  Image { get; set; }
     
     public string? ImageUrl { get; set; }
-
-    public HeroSlide ToHeroSlide()
-    {
-        return new HeroSlide
-        {
-            Title = Title,
-            Link = Link,
-            Order = Order,
-            IsActive = IsActive,
-            StartDate = StartDate,
-            ImageUrl = ImageUrl
-        };
-    }
+    
+    public string RowVersion { get; set; }
 }

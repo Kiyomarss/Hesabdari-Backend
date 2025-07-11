@@ -5,7 +5,9 @@ namespace ServiceContracts;
 
 public interface IHeroSlidesGetterService
 {
-    Task<HeroSlideResponse?> GetHeroSlideByHeroSlideId(int heroSlideId);
+    Task<GetHeroSlidesByIdResult> GetHeroSlideById(int heroSlideId);
     
-    Task<List<HeroSlideResponse>> GetHeroSlides();
+    Task<List<GetHeroSlidesResult>> GetHeroSlides();
+
+    Task<ImagesResponse> GetHeroSlidesImageUrl();
 }

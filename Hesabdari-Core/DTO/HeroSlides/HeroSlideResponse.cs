@@ -21,6 +21,8 @@ public class HeroSlideResponse
     public DateTime? EndDate { get; set; }
     
     public DateTime CreateAt { get; set; }
+    
+    public string RowVersion { get; set; }
 }
 
 
@@ -28,17 +30,17 @@ public static class HeroSlideExtensions
 {
     public static HeroSlideResponse ToHeroSlideResponse(this HeroSlide? heroSlide)
     {
-        return new HeroSlideResponse()
+        return new HeroSlideResponse
         {
-            Id = heroSlide.Id, 
-            Title = heroSlide.Title, 
-            Link = heroSlide.Link, 
-            Order = heroSlide.Order, 
-            IsActive = heroSlide.IsActive, 
-            ImageUrl = heroSlide.ImageUrl, 
-            StartDate = heroSlide.StartDate, 
-            EndDate = heroSlide.EndDate, 
-            CreateAt = heroSlide.CreateAt
+            Id = heroSlide.Id,
+            Title = heroSlide.Title,
+            Link = heroSlide.Link,
+            Order = heroSlide.Order,
+            IsActive = heroSlide.IsActive,
+            ImageUrl = heroSlide.ImageUrl,
+            StartDate = heroSlide.StartDate,
+            EndDate = heroSlide.EndDate,
+            RowVersion = Convert.ToBase64String(heroSlide.RowVersion)
         };
     }
 }

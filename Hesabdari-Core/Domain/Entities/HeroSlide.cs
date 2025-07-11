@@ -23,4 +23,7 @@ public class HeroSlide
     public DateTime? EndDate { get; set; }
     
     public DateTime CreateAt { get; set; }
+    
+    [Timestamp]
+    public byte[] RowVersion { get; set; }
 }

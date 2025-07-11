@@ -5,6 +5,6 @@ namespace ServiceContracts
 {
  public interface IHeroSlidesAdderService
  {
-  Task<HeroSlideResponse> AddHeroSlide(HeroSlideUpsertRequest heroSlideUpsertRequest);
+  Task AddHeroSlide(HeroSlideUpsertRequest heroSlideUpsertRequest);
  }
 }

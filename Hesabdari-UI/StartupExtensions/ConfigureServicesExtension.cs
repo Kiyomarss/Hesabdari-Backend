@@ -1,8 +1,10 @@
 ﻿using ContactsManager.Core.Domain.IdentityEntities;
 using Hesabdari_Core.ServiceContracts;
 using Hesabdari_Core.ServiceContracts.Base;
+using Hesabdari_Core.ServiceContracts.Storage;
 using Hesabdari_Core.Services;
 using Hesabdari_Core.Services.Base;
+using Hesabdari_Core.Services.Storage;
 using Hesabdari_Infrastructure.DbContext;
 using Hesabdari_Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
@@ -55,6 +57,8 @@ namespace Hesabdari_UI
    services.AddScoped<ISettingRepository, SettingRepository>();
    services.AddScoped<ISettingGetterService, SettingGetterService>();
    services.AddScoped<ISettingUpdaterService, SettingUpdaterService>();
+   
+   services.AddScoped<IImageStorageService, ImageStorageService>();
 
    services.AddDbContext<ApplicationDbContext>(options =>
    {

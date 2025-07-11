@@ -24,95 +24,40 @@ public class HeroSlidesController  : BaseController
     [HttpPost]
     public async Task<IActionResult> Create(HeroSlideUpsertRequest dto)
     {
-        if (dto.Image is { Length: > 0 })
-        {
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-            var fileExtension = Path.GetExtension(dto.Image.FileName).ToLower();
-
-            if (!allowedExtensions.Contains(fileExtension))
-            {
-                return BadRequest(new { Message = "Invalid file type. Only images are allowed." });
-            }
-
-            dto.ImageUrl = await SaveNewImageAsync(dto.Image);
-        }
-
-        var heroSlideResponse = await _heroSlidesAdderService.AddHeroSlide(dto);
+        await _heroSlidesAdderService.AddHeroSlide(dto);
 
         return Ok(new
         {
             Message = "HeroSlide created successfully",
-            HeroSlide = heroSlideResponse
         });
     }
 
     [HttpPut]
     public async Task<IActionResult> Edit(HeroSlideUpsertRequest dto)
     {
-        HeroSlideResponse? existingHeroSlide = await _heroSlidesGetterService.GetHeroSlideByHeroSlideId(dto.Id);
-        if (existingHeroSlide == null)
-        {
-            return NotFound(new { Message = "HeroSlide not found" });
-        }
-
-        if (dto.Image is { Length: > 0 })
-        {
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-            var fileExtension = Path.GetExtension(dto.Image.FileName).ToLower();
-            if (!allowedExtensions.Contains(fileExtension))
-            {
-                return BadRequest(new { Message = "Invalid file type. Only images are allowed." });
-            }
-
-            DeleteOldImage(existingHeroSlide.ImageUrl);
-
-            dto.ImageUrl = await SaveNewImageAsync(dto.Image);
-        }
-        else
-        {
-            // اگر تصویر جدید آپلود نشده، تصویر قبلی حفظ شود
-            dto.ImageUrl = existingHeroSlide.ImageUrl;
-        }
-
-        HeroSlideResponse updatedHeroSlide = await _heroSlidesUpdaterService.UpdateHeroSlide(dto);
+        await _heroSlidesUpdaterService.UpdateHeroSlide(dto);
 
         return Ok(new
         {
             Message = "HeroSlide updated successfully",
-            HeroSlide = updatedHeroSlide
         });
     }
-
-    private void DeleteOldImage(string? imagePath)
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
     {
-        if (!string.IsNullOrEmpty(imagePath))
-        {
-            var oldFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", imagePath.TrimStart('/'));
-            if (System.IO.File.Exists(oldFilePath))
-            {
-                System.IO.File.Delete(oldFilePath);
-            }
-        }
+        var deleteHeroSlide = await _heroSlidesDeleterService.DeleteHeroSlide(id);
+        return Ok(new { isDeleted = deleteHeroSlide });
     }
+    
+    #region Get
 
-    private async Task<string> SaveNewImageAsync(IFormFile image)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetHeroSlideById(int id)
     {
-        var fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
-        var imagesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-
-        if (!Directory.Exists(imagesFolderPath))
-        {
-            Directory.CreateDirectory(imagesFolderPath);
-        }
-
-        var filePath = Path.Combine(imagesFolderPath, fileName);
-
-        await using (var stream = new FileStream(filePath, FileMode.Create))
-        {
-            await image.CopyToAsync(stream);
-        }
-
-        return $"/images/{fileName}";
+        var heroSlide = await _heroSlidesGetterService.GetHeroSlideById(id);
+        
+        return Ok(new { HeroSlides = heroSlide });
     }
     
     [HttpGet]
@@ -122,10 +67,13 @@ public class HeroSlidesController  : BaseController
         return Ok(new { HeroSlides = heroSlides });
     }
     
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    [HttpGet]
+    public async Task<IActionResult> GetHeroSlidesImageUrl()
     {
-        var deleteHeroSlide = await _heroSlidesDeleterService.DeleteHeroSlide(id);
-        return Ok(new { isDeleted = deleteHeroSlide });
+        var imageUrls = await _heroSlidesGetterService.GetHeroSlidesImageUrl();
+
+        return Ok(imageUrls);
     }
+
+    #endregion
 }
