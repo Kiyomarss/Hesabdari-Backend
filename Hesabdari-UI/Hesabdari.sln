@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35521.163 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel-UI", "Hotel-UI.csproj", "{585060B4-16CA-4D76-B59C-7455247E63C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hesabdari-UI", "Hesabdari-UI.csproj", "{585060B4-16CA-4D76-B59C-7455247E63C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hesabdari-Infrastructure", "..\Hesabdari-Infrastructure\Hesabdari-Infrastructure.csproj", "{3127BD89-E541-4C45-9C60-3BF7C7B8194A}"
 EndProject
