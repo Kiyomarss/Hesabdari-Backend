@@ -1,4 +1,4 @@
-using Entities;
+using Hesabdari_Core.Domain.Entities;
 using Hesabdari_Core.Domain.Entities;
 
 namespace Hesabdari_Core.DTO;

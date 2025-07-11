@@ -1,5 +1,5 @@
 ﻿using ContactsManager.Core.Domain.IdentityEntities;
-using Entities;
+using Hesabdari_Core.Domain.Entities;
 using Hesabdari_Core.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +15,11 @@ namespace Hesabdari_Infrastructure.DbContext
   
   public DatabaseFacade Database => base.Database;
   
+  public DbSet<HeroSlide> HeroSlides { get; set; }
+  public DbSet<Booking> Bookings { get; set; }
+  public DbSet<Guest> Guests { get; set; }
+  public DbSet<Setting> Settings { get; set; }
+
   public new EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class => base.Entry(entity);
   
   protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,4 +1,4 @@
-using Entities;
+using Hesabdari_Core.Domain.Entities;
 using ServiceContracts;
 using Hesabdari_Core.DTO;
 using RepositoryContracts;

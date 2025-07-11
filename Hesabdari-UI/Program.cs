@@ -1,6 +1,5 @@
 using System.Configuration;
 using System.Text;
-using Entities;
 using Hesabdari_Infrastructure.DbContext;
 using Hesabdari_UI;
 using Hesabdari_UI.Filters;

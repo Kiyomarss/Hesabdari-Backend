@@ -1,4 +1,4 @@
-using Entities;
+using Hesabdari_Core.Domain.Entities;
 
 namespace ContactsManager.Core.DTO;
 

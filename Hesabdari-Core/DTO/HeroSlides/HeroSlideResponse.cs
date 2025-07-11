@@ -1,4 +1,4 @@
-using Entities;
+using Hesabdari_Core.Domain.Entities;
 
 namespace Hesabdari_Core.DTO;
 
@@ -23,24 +23,4 @@ public class HeroSlideResponse
     public DateTime CreateAt { get; set; }
     
     public string RowVersion { get; set; }
-}
-
-
-public static class HeroSlideExtensions
-{
-    public static HeroSlideResponse ToHeroSlideResponse(this HeroSlide? heroSlide)
-    {
-        return new HeroSlideResponse
-        {
-            Id = heroSlide.Id,
-            Title = heroSlide.Title,
-            Link = heroSlide.Link,
-            Order = heroSlide.Order,
-            IsActive = heroSlide.IsActive,
-            ImageUrl = heroSlide.ImageUrl,
-            StartDate = heroSlide.StartDate,
-            EndDate = heroSlide.EndDate,
-            RowVersion = Convert.ToBase64String(heroSlide.RowVersion)
-        };
-    }
 }

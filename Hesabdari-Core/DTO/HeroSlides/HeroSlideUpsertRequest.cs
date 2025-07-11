@@ -1,4 +1,4 @@
-using Entities;
+using Hesabdari_Core.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 
 namespace Hesabdari_Core.DTO;

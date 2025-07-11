@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Entities;
+namespace Hesabdari_Core.Domain.Entities;
 
 public class Setting
 {
