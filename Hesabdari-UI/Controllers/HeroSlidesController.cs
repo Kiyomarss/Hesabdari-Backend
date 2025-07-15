@@ -68,7 +68,7 @@ public class HeroSlidesController  : BaseController
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetHeroSlidesImageUrl()
+    public async Task<IActionResult> GetHeroSlidesImage()
     {
         var imageUrls = await _heroSlidesGetterService.GetHeroSlidesImageUrl();
 
