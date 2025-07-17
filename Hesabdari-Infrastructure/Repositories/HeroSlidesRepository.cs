@@ -20,10 +20,12 @@ namespace Repositories
         {
             await _db.Set<HeroSlide>().AddAsync(heroSlide);
 
+            await _db.SaveChangesAsync();
+            
             return heroSlide;
         }
 
-        public Task UpdateHeroSlide(HeroSlide heroSlide)
+        public Task UpdateHeroSlide()
         {
             return _db.SaveChangesAsync();
         }
@@ -51,7 +53,7 @@ namespace Repositories
             return await _db.Set<HeroSlide>()
                             .Where(x => x.ImageUrl == text)
                             .Select(x => x.ImageUrl)
-                            .CountAsync()>1;
+                            .CountAsync() > 1;
         }
         
         public async Task<HeroSlide?> FindHeroSlideById(int heroSlideId)

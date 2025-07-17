@@ -24,22 +24,24 @@ public class HeroSlidesController  : BaseController
     [HttpPost]
     public async Task<IActionResult> Create(HeroSlideUpsertRequest dto)
     {
-        await _heroSlidesAdderService.AddHeroSlide(dto);
+        var heroSlides = await _heroSlidesAdderService.AddHeroSlide(dto);
 
         return Ok(new
         {
-            Message = "HeroSlide created successfully",
+            HeroSlides = heroSlides,
+            Message = "HeroSlide created successfully"
         });
     }
 
     [HttpPut]
     public async Task<IActionResult> Edit(HeroSlideUpsertRequest dto)
     {
-        await _heroSlidesUpdaterService.UpdateHeroSlide(dto);
+        var heroSlides = await _heroSlidesUpdaterService.UpdateHeroSlide(dto);
 
         return Ok(new
         {
-            Message = "HeroSlide updated successfully",
+            HeroSlides = heroSlides,
+            Message = "HeroSlide updated successfully"
         });
     }
     

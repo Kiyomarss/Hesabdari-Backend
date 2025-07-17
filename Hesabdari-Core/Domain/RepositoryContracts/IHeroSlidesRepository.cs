@@ -16,5 +16,5 @@ public interface IHeroSlidesRepository
 
     Task<bool> DeleteHeroSlide(int heroSlideId);
 
-    Task UpdateHeroSlide(HeroSlide heroSlide);
+    Task UpdateHeroSlide();
 }

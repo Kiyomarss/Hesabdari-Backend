@@ -1,4 +1,5 @@
-﻿using Hesabdari_Core.DTO;
+﻿using Hesabdari_Core.Domain.Entities;
+using Hesabdari_Core.DTO;
 using Hesabdari_Core.ServiceContracts;
 using Hesabdari_Core.ServiceContracts.Storage;
 using Hesabdari_Core.Utils;
@@ -27,29 +28,28 @@ namespace Services
    _logger = logger;
   }
 
-  public async Task AddHeroSlide(HeroSlideUpsertRequest heroSlideAddRequest)
+  public async Task<GetHeroSlidesResult> AddHeroSlide(HeroSlideUpsertRequest heroSlideAddRequest)
   {
-   var heroSlideById = await _heroSlidesRepository.FindHeroSlideById(heroSlideAddRequest.Id);
+   var heroSlide = new HeroSlide();
    
-   if (heroSlideById == null)
-    throw new InvalidOperationException("HeroSlide with the given ID does not exist.");
-
    if (heroSlideAddRequest.Image != null)
-    heroSlideById.ImageUrl = await _imageStorageService.SaveImageAsync(heroSlideAddRequest.Image);
+    heroSlide.ImageUrl = await _imageStorageService.SaveImageAsync(heroSlideAddRequest.Image);
    
    if (heroSlideAddRequest.StartDate != null)
-    heroSlideById.StartDate = DateTimeUtils.TryParsePersianDateTime(heroSlideAddRequest.StartDate);
+    heroSlide.StartDate = DateTimeUtils.TryParsePersianDateTime(heroSlideAddRequest.StartDate);
    
    if (heroSlideAddRequest.EndDate != null)
-    heroSlideById.EndDate = DateTimeUtils.TryParsePersianDateTime(heroSlideAddRequest.EndDate);
+    heroSlide.EndDate = DateTimeUtils.TryParsePersianDateTime(heroSlideAddRequest.EndDate);
       
-   heroSlideById.Title = heroSlideAddRequest.Title;
+   heroSlide.Title = heroSlideAddRequest.Title;
    //heroSlideById.Link = heroSlideAddRequest.Link;
-   heroSlideById.Order = heroSlideAddRequest.Order;
-   heroSlideById.IsActive = heroSlideAddRequest.IsActive;
-   heroSlideById.CreateAt = DateTime.Now;
+   heroSlide.Order = heroSlideAddRequest.Order;
+   heroSlide.IsActive = heroSlideAddRequest.IsActive;
+   heroSlide.CreateAt = DateTime.Now;
    
-   await _heroSlidesRepository.AddHeroSlide(heroSlideById);
+   var slide  = await _heroSlidesRepository.AddHeroSlide(heroSlide);
+
+   return new GetHeroSlidesResult(slide.Id, slide.Title, slide.ImageUrl, slide.Order, slide.IsActive, slide.StartDate.ToPersianDate(), slide.EndDate.ToPersianDate());
   }
  }
 }

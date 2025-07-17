@@ -27,7 +27,7 @@ namespace Services
    _logger = logger;
   }
 
-  public async Task UpdateHeroSlide(HeroSlideUpsertRequest heroSlideUpdateRequest)
+  public async Task<GetHeroSlidesResult> UpdateHeroSlide(HeroSlideUpsertRequest heroSlideUpdateRequest)
   {
    if (heroSlideUpdateRequest == null)
     throw new InvalidOperationException("HeroSlide with the given ID does not exist.");
@@ -56,7 +56,9 @@ namespace Services
    if (heroSlideUpdateRequest.EndDate != null)
     heroSlide.EndDate = DateTimeUtils.TryParsePersianDateTime(heroSlideUpdateRequest.EndDate);
 
-   await _heroSlidesRepository.UpdateHeroSlide(heroSlide);
+   await _heroSlidesRepository.UpdateHeroSlide();
+
+   return new GetHeroSlidesResult(heroSlide.Id, heroSlide.Title, heroSlide.ImageUrl, heroSlide.Order, heroSlide.IsActive, heroSlide.StartDate.ToPersianDate(), heroSlide.EndDate.ToPersianDate());
   }
  }
 }
