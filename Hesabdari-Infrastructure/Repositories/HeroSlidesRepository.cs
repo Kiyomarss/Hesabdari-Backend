@@ -23,11 +23,9 @@ namespace Repositories
             return heroSlide;
         }
 
-        public Task<HeroSlide> UpdateHeroSlide(HeroSlide heroSlide)
+        public Task UpdateHeroSlide(HeroSlide heroSlide)
         {
-            _db.Set<HeroSlide>().Update(heroSlide);
-
-            return Task.FromResult(heroSlide);
+            return _db.SaveChangesAsync();
         }
         
         public async Task<List<string>> GetHeroSlidesImageUrl()
@@ -46,6 +44,14 @@ namespace Repositories
         public async Task<List<HeroSlide>> GetHeroSlides()
         {
             return await _db.Set<HeroSlide>().ToListAsync();
+        }
+        
+        public async Task<bool> HasMultipleHeroSlidesWithImage(string text)
+        {
+            return await _db.Set<HeroSlide>()
+                            .Where(x => x.ImageUrl == text)
+                            .Select(x => x.ImageUrl)
+                            .CountAsync()>1;
         }
         
         public async Task<HeroSlide?> FindHeroSlideById(int heroSlideId)

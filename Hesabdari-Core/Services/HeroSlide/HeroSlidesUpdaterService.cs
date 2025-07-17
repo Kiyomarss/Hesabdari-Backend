@@ -32,28 +32,31 @@ namespace Services
    if (heroSlideUpdateRequest == null)
     throw new InvalidOperationException("HeroSlide with the given ID does not exist.");
    
-   var heroSlideById = await _heroSlidesRepository.FindHeroSlideById(heroSlideUpdateRequest.Id);
+   var heroSlide = await _heroSlidesRepository.FindHeroSlideById(heroSlideUpdateRequest.Id);
    
-   if (heroSlideById == null)
+   if (heroSlide == null)
     throw new InvalidOperationException("HeroSlide with the given ID does not exist.");
 
    if (heroSlideUpdateRequest.Image != null)
    {
-    await _imageStorageService.DeleteOldImage(heroSlideById.ImageUrl);
-    
-    heroSlideById.ImageUrl = await _imageStorageService.SaveImageAsync(heroSlideUpdateRequest.Image);
+    if (!await _heroSlidesRepository.HasMultipleHeroSlidesWithImage(heroSlide.ImageUrl))
+     await _imageStorageService.DeleteOldImage(heroSlide.ImageUrl);
+
+    var newImageUrl = await _imageStorageService.SaveImageAsync(heroSlideUpdateRequest.Image);
+    heroSlide.ImageUrl = newImageUrl;
    }
-   
-   heroSlideById.Title = heroSlideUpdateRequest.Title;
-   heroSlideById.Link = heroSlideUpdateRequest.Link;
-   heroSlideById.Order = heroSlideUpdateRequest.Order;
-   heroSlideById.IsActive = heroSlideUpdateRequest.IsActive;
+
+   heroSlide.Title = heroSlideUpdateRequest.Title;
+   //heroSlideById.Link = "Link";
+   heroSlide.Order = heroSlideUpdateRequest.Order;
+   heroSlide.IsActive = heroSlideUpdateRequest.IsActive;
+
    if (heroSlideUpdateRequest.StartDate != null)
-    heroSlideById.StartDate = DateTimeUtils.TryParsePersianDateTime(heroSlideUpdateRequest.StartDate);
+    heroSlide.StartDate = DateTimeUtils.TryParsePersianDateTime(heroSlideUpdateRequest.StartDate);
    if (heroSlideUpdateRequest.EndDate != null)
-    heroSlideById.EndDate = DateTimeUtils.TryParsePersianDateTime(heroSlideUpdateRequest.EndDate);
-   
-   await _heroSlidesRepository.UpdateHeroSlide(heroSlideById);
+    heroSlide.EndDate = DateTimeUtils.TryParsePersianDateTime(heroSlideUpdateRequest.EndDate);
+
+   await _heroSlidesRepository.UpdateHeroSlide(heroSlide);
   }
  }
 }

@@ -5,11 +5,11 @@ namespace Hesabdari_Core.DTO;
 
 public class HeroSlideUpsertRequest
 {
-    public int Id { get; set; }
+    public int Id { get; set; } = 0;
     
     public string Title { get; set; }
     
-    public string Link { get; set; }
+    public string? Link { get; set; }
     
     public int Order { get; set; }
     
@@ -23,5 +23,5 @@ public class HeroSlideUpsertRequest
     
     public string? ImageUrl { get; set; }
     
-    public string RowVersion { get; set; }
+    public string? RowVersion { get; set; }
 }

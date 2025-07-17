@@ -44,7 +44,7 @@ namespace Services
     heroSlideById.EndDate = DateTimeUtils.TryParsePersianDateTime(heroSlideAddRequest.EndDate);
       
    heroSlideById.Title = heroSlideAddRequest.Title;
-   heroSlideById.Link = heroSlideAddRequest.Link;
+   //heroSlideById.Link = heroSlideAddRequest.Link;
    heroSlideById.Order = heroSlideAddRequest.Order;
    heroSlideById.IsActive = heroSlideAddRequest.IsActive;
    heroSlideById.CreateAt = DateTime.Now;
