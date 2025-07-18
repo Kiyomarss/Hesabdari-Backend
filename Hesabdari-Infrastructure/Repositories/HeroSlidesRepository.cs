@@ -39,6 +39,7 @@ namespace Repositories
                                        b.IsActive &&
                                        (b.StartDate == null || b.StartDate.Value.Date <= today) &&
                                        (b.EndDate == null || b.EndDate.Value.Date >= today))
+                            .OrderBy(x => x.Order)
                             .Select(x => x.ImageUrl)
                             .ToListAsync();
         }
