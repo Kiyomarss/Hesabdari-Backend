@@ -52,9 +52,9 @@ namespace Services
    heroSlide.IsActive = heroSlideUpdateRequest.IsActive;
 
    if (heroSlideUpdateRequest.StartDate != null)
-    heroSlide.StartDate = DateTimeUtils.TryParsePersianDateTime(heroSlideUpdateRequest.StartDate);
+    heroSlide.StartDate = DateTimeUtils.TryParsePersianDate(heroSlideUpdateRequest.StartDate);
    if (heroSlideUpdateRequest.EndDate != null)
-    heroSlide.EndDate = DateTimeUtils.TryParsePersianDateTime(heroSlideUpdateRequest.EndDate);
+    heroSlide.EndDate = DateTimeUtils.TryParsePersianDate(heroSlideUpdateRequest.EndDate);
 
    await _heroSlidesRepository.UpdateHeroSlide();
 

@@ -36,10 +36,10 @@ namespace Services
     heroSlide.ImageUrl = await _imageStorageService.SaveImageAsync(heroSlideAddRequest.Image);
    
    if (heroSlideAddRequest.StartDate != null)
-    heroSlide.StartDate = DateTimeUtils.TryParsePersianDateTime(heroSlideAddRequest.StartDate);
+    heroSlide.StartDate = DateTimeUtils.TryParsePersianDate(heroSlideAddRequest.StartDate);
    
    if (heroSlideAddRequest.EndDate != null)
-    heroSlide.EndDate = DateTimeUtils.TryParsePersianDateTime(heroSlideAddRequest.EndDate);
+    heroSlide.EndDate = DateTimeUtils.TryParsePersianDate(heroSlideAddRequest.EndDate);
       
    heroSlide.Title = heroSlideAddRequest.Title;
    //heroSlideById.Link = heroSlideAddRequest.Link;
