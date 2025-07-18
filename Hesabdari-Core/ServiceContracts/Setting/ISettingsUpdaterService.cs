@@ -1,11 +1,9 @@
-﻿using ContactsManager.Core.DTO;
-using Hesabdari_Core.Domain.Entities;
-using Hesabdari_Core.DTO;
+﻿using Hesabdari_Core.DTO.Setting;
 
 namespace ServiceContracts
 {
  public interface ISettingUpdaterService
  {
-  Task<Setting> UpdateSetting(Setting setting);
+  Task UpdateSetting(SettingUpdateRequest dto);
  }
 }

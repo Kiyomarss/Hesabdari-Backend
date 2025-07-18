@@ -1,6 +1,6 @@
-﻿using Hesabdari_Core.Domain.Entities;
-using Hesabdari_Core.DTO;
+﻿using Hesabdari_Core.DTO.Setting;
 using Hesabdari_Core.ServiceContracts;
+using Hesabdari_Core.ServiceContracts.Storage;
 using ServiceContracts;
 using RepositoryContracts;
 using Microsoft.Extensions.Logging;
@@ -10,25 +10,41 @@ namespace Services
  public class SettingUpdaterService : ISettingUpdaterService
  {
   private readonly ISettingRepository _settingRepository;
+  private readonly IImageStorageService _imageStorageService;
   private readonly IUnitOfWork _unitOfWork;
   private readonly ILogger<SettingGetterService> _logger;
 
   public SettingUpdaterService(
    ISettingRepository settingRepository,
+   IImageStorageService imageStorageService,
    IUnitOfWork unitOfWork,
    ILogger<SettingGetterService> logger)
   {
    _settingRepository = settingRepository;
+   _imageStorageService = imageStorageService;
    _unitOfWork = unitOfWork;
    _logger = logger;
   }
 
-  public async Task<Setting> UpdateSetting(Setting setting)
+  public async Task UpdateSetting(SettingUpdateRequest dto)
   {
-   if (setting == null)
-    throw new ArgumentNullException(nameof(setting));
+   if (dto == null)
+    throw new ArgumentNullException(nameof(dto));
+
+   var setting = await _settingRepository.GetSetting();
    
-   return await _unitOfWork.ExecuteTransactionAsync(async () => await _settingRepository.UpdateSetting(setting));
+   setting.IsSlideAutoChangeEnabled = dto.IsSlideAutoChangeEnabled;
+
+   setting.SlideIntervalInSeconds = !setting.IsSlideAutoChangeEnabled ? null : dto.SlideIntervalInSeconds;
+   
+   if (dto.Image != null)
+   {
+     await _imageStorageService.DeleteOldImage(setting.LogoImageUrl);
+
+     setting.LogoImageUrl = await _imageStorageService.SaveImageAsync(dto.Image);
+   }
+
+   await _settingRepository.UpdateSetting(setting);
   }
  }
 }

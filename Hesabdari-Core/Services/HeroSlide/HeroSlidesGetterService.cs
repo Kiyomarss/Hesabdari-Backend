@@ -1,10 +1,8 @@
 using ServiceContracts;
-using ContactsManager.Core.DTO;
 using Hesabdari_Core.DTO;
 using Hesabdari_Core.Utils;
 using RepositoryContracts;
 using Microsoft.Extensions.Logging;
-using Serilog;
 
 namespace Services
 {

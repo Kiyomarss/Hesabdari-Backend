@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Hesabdari_Core.Domain.Entities;
 
 namespace Hesabdari_Core.Domain.Entities;
 

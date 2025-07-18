@@ -1,12 +1,7 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using ContactsManager.Core.Domain.IdentityEntities;
-using Hesabdari_Core.DTO;
 using Hesabdari_Core.DTO.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Hesabdari_Core.ServiceContracts;
 using Hesabdari_Core.ServiceContracts.Base;
 using SixLabors.ImageSharp;

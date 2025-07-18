@@ -1,10 +1,8 @@
-using ContactsManager.Core.DTO;
-using Hesabdari_Core.Domain.Entities;
-using Hesabdari_Core.DTO;
+using Hesabdari_Core.DTO.Setting;
 
 namespace ServiceContracts;
 
 public interface ISettingGetterService
 {
-    Task<Setting> GetSetting();
+    Task<SettingResult> GetSetting();
 }

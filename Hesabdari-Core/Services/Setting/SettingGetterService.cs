@@ -1,9 +1,7 @@
-using Hesabdari_Core.Domain.Entities;
 using ServiceContracts;
-using Hesabdari_Core.DTO;
+using Hesabdari_Core.DTO.Setting;
 using RepositoryContracts;
 using Microsoft.Extensions.Logging;
-using Serilog;
 
 namespace Services
 {
@@ -19,7 +17,7 @@ namespace Services
    _logger = logger;
   }
   
-  public virtual async Task<Setting> GetSetting()
+  public virtual async Task<SettingResult> GetSetting()
   {
    var setting = await _settingRepository.GetSetting();
     
@@ -28,7 +26,7 @@ namespace Services
     throw new InvalidOperationException("No settings found");
    }
 
-   return setting;
+   return new SettingResult(setting.IsSlideAutoChangeEnabled, setting.SlideIntervalInSeconds, setting.LogoImageUrl);
   }
 
  }

@@ -2,7 +2,6 @@
 using ServiceContracts;
 using RepositoryContracts;
 using Microsoft.Extensions.Logging;
-using Serilog;
 
 namespace Services
 {

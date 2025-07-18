@@ -1,7 +1,5 @@
 using Hesabdari_Core.Domain.Entities;
-using Hesabdari_Core.Domain.Entities;
 using Hesabdari_Core.DTO;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace RepositoryContracts;
 

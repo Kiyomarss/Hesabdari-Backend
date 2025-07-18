@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using ContactsManager.Core.Domain.IdentityEntities;
 
 namespace Hesabdari_Core.ServiceContracts

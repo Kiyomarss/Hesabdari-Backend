@@ -1,4 +1,3 @@
-using ContactsManager.Core.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Http;
 
 namespace Hesabdari_Core.DTO.Auth;

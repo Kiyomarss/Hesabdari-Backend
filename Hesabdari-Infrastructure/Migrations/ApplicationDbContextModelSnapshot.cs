@@ -263,24 +263,20 @@ namespace Hesabdari_Infrastructure.Migrations
 
             modelBuilder.Entity("Hesabdari_Core.Domain.Entities.Setting", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                     .ValueGeneratedOnAdd()
+                     .HasColumnType("int");
+                    
+                    b.Property<string>("LogoImageUrl")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BreakfastPrice")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsSlideAutoChangeEnabled")
+                     .IsRequired()
+                     .HasColumnType("bit");
 
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MaxBookingLength")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaxGuestsPerBooking")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MinBookingLength")
-                        .HasColumnType("int");
+                    b.Property<int>("SlideIntervalInSeconds")
+                     .HasColumnType("int");
 
                     b.HasKey("Id");
 

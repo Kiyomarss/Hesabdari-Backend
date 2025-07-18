@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using ContactsManager.Core.Domain.IdentityEntities;
 using Hesabdari_Core.ServiceContracts;
 using Microsoft.AspNetCore.Identity;

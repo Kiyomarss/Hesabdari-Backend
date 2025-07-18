@@ -18,21 +18,18 @@ public class SettingsController  : BaseController
     }
     
     [HttpPut]
-    public async Task<IActionResult> Edit(Setting dto)
+    public async Task<IActionResult> Edit(SettingUpdateRequest dto)
     {
-        var setting = await _settingUpdaterService.UpdateSetting(dto);
-
-        var response = new SettingResponseDto(new SettingDataDto(setting.MaxGuestsPerBooking, setting.BreakfastPrice, setting.MinBookingLength, setting.MaxBookingLength), "Setting updated successfully");
-
-        return Ok(response);
+        await _settingUpdaterService.UpdateSetting(dto);
+        
+        return Ok();
     }
     
     [HttpGet]
     public async Task<IActionResult> GetSettings()
     {
         var setting = await _settingGetterService.GetSetting();
-        var response = new SettingResponseDto(new SettingDataDto(setting.MaxGuestsPerBooking, setting.BreakfastPrice, setting.MinBookingLength, setting.MaxBookingLength));
 
-        return Ok(response);
+        return Ok(setting);
     }
 }

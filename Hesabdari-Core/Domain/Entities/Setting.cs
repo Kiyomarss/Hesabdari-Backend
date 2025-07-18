@@ -5,15 +5,11 @@ namespace Hesabdari_Core.Domain.Entities;
 public class Setting
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     
-    public int MinBookingLength { get; set; }
+    public bool IsSlideAutoChangeEnabled { get; set; }
     
-    public int MaxBookingLength { get; set; }
+    public int? SlideIntervalInSeconds { get; set; }
     
-    public int MaxGuestsPerBooking { get; set; }
-    
-    public int BreakfastPrice { get; set; }
-    
-    public DateTime CreateAt { get; set; }
+    public string? LogoImageUrl { get; set; }
 }

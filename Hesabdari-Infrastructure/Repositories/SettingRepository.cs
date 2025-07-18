@@ -15,21 +15,14 @@ namespace Repositories
             _db = db;
         }
 
-        public async Task<Setting?> GetSetting()
+        public async Task<Setting> GetSetting()
         {
-            return await _db.Set<Setting>().SingleOrDefaultAsync();
+            return await _db.Set<Setting>().SingleAsync();
         }
 
-        public async Task<Setting> UpdateSetting(Setting setting)
+        public Task UpdateSetting(Setting setting)
         {
-            var matchingSetting = await _db.Set<Setting>().SingleAsync();
-            
-            matchingSetting.MinBookingLength = setting.MinBookingLength;
-            matchingSetting.MaxBookingLength = setting.MaxBookingLength;
-            matchingSetting.MaxGuestsPerBooking = setting.MaxGuestsPerBooking;
-            matchingSetting.BreakfastPrice = setting.BreakfastPrice;
-            
-            return matchingSetting;
+            return _db.SaveChangesAsync();
         }
     }
 }
