@@ -268,7 +268,6 @@ namespace Hesabdari_Infrastructure.Migrations
                      .HasColumnType("int");
                     
                     b.Property<string>("LogoImageUrl")
-                     .IsRequired()
                      .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsSlideAutoChangeEnabled")

@@ -6,4 +6,8 @@ public record SettingsSlidesDto(bool IsSlideAutoChangeEnabled, int? SlideInterva
 public record LogoResult(string? LogoUrl);
 
 public record SettingUpdateRequest(bool IsSlideAutoChangeEnabled, int? SlideIntervalInSeconds, IFormFile? Image);
-public record LogoRequest(IFormFile Image);
+
+public class LogoRequest
+{
+    public IFormFile? Image { get; set; }
+}
