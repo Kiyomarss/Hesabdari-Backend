@@ -4,7 +4,7 @@ namespace ServiceContracts
 {
  public interface ISettingUpdaterService
  {
-  Task<SettingsSlidesDto> UpdateSettingsSlides(SettingsSlidesDto dto);
+  Task<SettingsSlidesResult> UpdateSettingsSlides(SettingsSlidesRequest dto);
   
   Task<LogoResult> UpdateLogo(LogoRequest result);
  }

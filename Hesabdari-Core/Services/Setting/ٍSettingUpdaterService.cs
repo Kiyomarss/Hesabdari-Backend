@@ -26,7 +26,7 @@ namespace Services
             _logger = logger;
         }
 
-        public async Task<SettingsSlidesDto> UpdateSettingsSlides(SettingsSlidesDto dto)
+        public async Task<SettingsSlidesResult> UpdateSettingsSlides(SettingsSlidesRequest dto)
         {
             if (dto == null)
                 throw new ArgumentNullException(nameof(dto));
@@ -39,7 +39,7 @@ namespace Services
 
             await _settingRepository.UpdateSetting();
 
-            return new SettingsSlidesDto(setting.IsSlideAutoChangeEnabled, setting.SlideIntervalInSeconds);
+            return new SettingsSlidesResult(setting.IsSlideAutoChangeEnabled, setting.SlideIntervalInSeconds);
         }
 
         public async Task<LogoResult> UpdateLogo(LogoRequest result)

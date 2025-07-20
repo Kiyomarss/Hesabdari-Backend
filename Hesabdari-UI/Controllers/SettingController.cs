@@ -18,7 +18,7 @@ public class SettingsController  : BaseController
     }
     
     [HttpPut]
-    public async Task<IActionResult> EditSettingsSlides(SettingsSlidesDto dto)
+    public async Task<IActionResult> EditSettingsSlides(SettingsSlidesRequest dto)
     {
         var result = await _settingUpdaterService.UpdateSettingsSlides(dto);
         

@@ -4,7 +4,7 @@ namespace ServiceContracts;
 
 public interface ISettingGetterService
 {
-    Task<SettingsSlidesDto> GetSettingsSlides();
+    Task<SettingsSlidesResult> GetSettingsSlides();
 
     Task<LogoResult> GetLogo();
 }
