@@ -17,7 +17,7 @@ namespace Services
    _logger = logger;
   }
   
-  public virtual async Task<SettingsSlidesResult> GetSettingsSlides()
+  public virtual async Task<SettingsSlidesDto> GetSettingsSlides()
   {
    var setting = await _settingRepository.GetSetting();
     
@@ -26,7 +26,7 @@ namespace Services
     throw new InvalidOperationException("No settings found");
    }
 
-   return new SettingsSlidesResult(setting.IsSlideAutoChangeEnabled, setting.SlideIntervalInSeconds);
+   return new SettingsSlidesDto(setting.IsSlideAutoChangeEnabled, setting.SlideIntervalInSeconds);
   }
   
   public virtual async Task<LogoResult> GetLogo()

@@ -20,7 +20,7 @@ namespace Repositories
             return await _db.Set<Setting>().SingleAsync();
         }
 
-        public Task UpdateSetting(Setting setting)
+        public Task UpdateSetting()
         {
             return _db.SaveChangesAsync();
         }

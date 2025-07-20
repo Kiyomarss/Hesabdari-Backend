@@ -18,11 +18,19 @@ public class SettingsController  : BaseController
     }
     
     [HttpPut]
-    public async Task<IActionResult> Edit(SettingUpdateRequest dto)
+    public async Task<IActionResult> EditSettingsSlides(SettingsSlidesDto dto)
     {
-        await _settingUpdaterService.UpdateSetting(dto);
+        var result = await _settingUpdaterService.UpdateSettingsSlides(dto);
         
-        return Ok();
+        return Ok(result);
+    }
+    
+    [HttpPut]
+    public async Task<IActionResult> UpdateLogo(LogoRequest dto)
+    {
+        var result = await _settingUpdaterService.UpdateLogo(dto);
+        
+        return Ok(result);
     }
     
     [HttpGet]

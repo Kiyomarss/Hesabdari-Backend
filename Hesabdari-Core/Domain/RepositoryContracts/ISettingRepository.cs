@@ -6,5 +6,5 @@ public interface ISettingRepository
 {
     Task<Setting> GetSetting();
     
-    Task UpdateSetting(Setting setting);
+    Task UpdateSetting();
 }
