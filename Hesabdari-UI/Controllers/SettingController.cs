@@ -26,10 +26,18 @@ public class SettingsController  : BaseController
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetSettings()
+    public async Task<IActionResult> GetSettingsSlides()
     {
-        var setting = await _settingGetterService.GetSetting();
+        var settingsSlides = await _settingGetterService.GetSettingsSlides();
 
-        return Ok(setting);
+        return Ok(settingsSlides);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetLogo()
+    {
+        var logo = await _settingGetterService.GetLogo();
+
+        return Ok(logo);
     }
 }
