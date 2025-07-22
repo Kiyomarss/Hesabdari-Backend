@@ -35,7 +35,7 @@ namespace Services
 
             setting.IsSlideAutoChangeEnabled = dto.IsSlideAutoChangeEnabled;
 
-            setting.SlideIntervalInSeconds = !setting.IsSlideAutoChangeEnabled ? null : dto.SlideIntervalInSeconds;
+            setting.SlideIntervalInSeconds = dto.SlideIntervalInSeconds;
 
             await _settingRepository.UpdateSetting();
 

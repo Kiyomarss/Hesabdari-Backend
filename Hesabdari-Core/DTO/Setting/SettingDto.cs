@@ -9,13 +9,13 @@ public record SettingUpdateRequest(bool IsSlideAutoChangeEnabled, int? SlideInte
 
 public class LogoRequest
 {
-    public IFormFile? Image { get; set; }
+    public required IFormFile Image { get; set; }
 }
 
 public class SettingsSlidesRequest
 {
     public bool IsSlideAutoChangeEnabled { get; set; }
     
-    public int SlideIntervalInSeconds { get; set; }
+    public int? SlideIntervalInSeconds { get; set; }
 }
 
