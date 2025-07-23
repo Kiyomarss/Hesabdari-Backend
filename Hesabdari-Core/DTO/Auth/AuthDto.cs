@@ -12,7 +12,10 @@ public record UserDetails(string? PersonName,string Email, string? AvatarPath);
 
 public record ChangePasswordRequest(string CurrentPassword, string NewPassword);
 
-public record UpdateAvatarRequest(IFormFile Avatar);
+public class UpdateAvatarRequest
+{
+    public required IFormFile Avatar { get; set; }
+}
 
 public record UpdatePersonNameRequest(string NewPersonName);
 
