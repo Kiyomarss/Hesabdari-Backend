@@ -72,6 +72,14 @@ namespace Hesabdari_UI.Controllers
             return Ok(result);
         }
         
+        [HttpGet]
+        public async Task<IActionResult> GetUserHeaderInfo()
+        {
+            var result = await _authService.GetUserHeaderInfoAsync();
+
+            return Ok(result);
+        }
+        
         [HttpDelete("{userId}")]
         public async Task<IActionResult> DeleteUser(string userId)
         {

@@ -54,6 +54,13 @@ namespace Hesabdari_Core.Services
             return new LoginResult(token, new UserDetails(user.PersonName, user.Email, user.AvatarPath), refreshToken);
         }
 
+        public async Task<UserHeaderInfoResult> GetUserHeaderInfoAsync()
+        {
+            var user = await _identityService.GetCurrentUserAsync();
+            
+            return new UserHeaderInfoResult(user.PersonName, user.AvatarPath);
+        }
+        
         public async Task LogoutAsync()
         {
             var user = await _identityService.GetCurrentUserWithoutErrorAsync();
