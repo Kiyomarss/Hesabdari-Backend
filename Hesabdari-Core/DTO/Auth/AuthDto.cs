@@ -10,7 +10,7 @@ public record LoginRequest(string Email, string Password);
 
 public record UserHeaderInfoResult(string? personName, string? avatarPath);
 
-public record UserDetails(string? PersonName,string Email, string? AvatarPath);
+public record UserDetails(string? PersonName,string Email, string? AvatarPath, bool IsAdmin = false);
 
 public record ChangePasswordRequest(string CurrentPassword, string NewPassword);
 

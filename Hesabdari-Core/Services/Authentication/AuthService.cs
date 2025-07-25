@@ -51,7 +51,9 @@ namespace Hesabdari_Core.Services
             var refreshToken = Guid.NewGuid().ToString();
             await _userManager.SetAuthenticationTokenAsync(user, "JWT", "RefreshToken", refreshToken);
 
-            return new LoginResult(token, new UserDetails(user.PersonName, user.Email, user.AvatarPath), refreshToken);
+            var isCurrentUserAdmin = await _identityService.IsCurrentUserAdminAsync();
+            
+            return new LoginResult(token, new UserDetails(user.PersonName, user.Email, user.AvatarPath, isCurrentUserAdmin), refreshToken);
         }
 
         public async Task<UserHeaderInfoResult> GetUserHeaderInfoAsync()
