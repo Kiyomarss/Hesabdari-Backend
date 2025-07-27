@@ -8,6 +8,8 @@ public interface IAuthService
 
     Task<LoginResult> LoginAsync(LoginRequest request);
     
+    Task<UserDetails> GetCurrentUserDetailsAsync();
+    
     Task LogoutAsync();
 
     Task<LoginResult> RefreshTokenAsync(string refreshToken, string email);

@@ -88,6 +88,12 @@ namespace Hesabdari_Core.Services
             var user = await _userManager.FindByIdAsync(userId);
             return user != null && await _userManager.IsInRoleAsync(user, roleName);
         }
+        
+        public async Task<bool> UserHasRoleAsync(string userId, string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            return user != null && await _userManager.IsInRoleAsync(user, roleName);
+        }
 
         public async Task<IList<string>> GetCurrentUserRolesAsync()
         {
@@ -108,6 +114,11 @@ namespace Hesabdari_Core.Services
         public async Task<bool> IsCurrentUserAdminAsync()
         {
             return await CurrentUserHasRoleAsync(Constant.Constant.Role.Admin);
+        }
+        
+        public async Task<bool> IsUserAdminAsync(string userId)
+        {
+            return await UserHasRoleAsync(userId, Constant.Constant.Role.Admin);
         }
         
         public async Task<bool> HasAccessAsync(string requiredPermission)

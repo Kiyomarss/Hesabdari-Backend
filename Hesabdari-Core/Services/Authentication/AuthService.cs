@@ -51,11 +51,20 @@ namespace Hesabdari_Core.Services
             var refreshToken = Guid.NewGuid().ToString();
             await _userManager.SetAuthenticationTokenAsync(user, "JWT", "RefreshToken", refreshToken);
 
-            var isCurrentUserAdmin = await _identityService.IsCurrentUserAdminAsync();
+            var isCurrentUserAdmin = await _identityService.IsUserAdminAsync(user.Id.ToString());
             
             return new LoginResult(token, new UserDetails(user.PersonName, user.Email, user.AvatarPath, isCurrentUserAdmin), refreshToken);
         }
 
+        public async Task<UserDetails> GetCurrentUserDetailsAsync()
+        {
+            var user = await _identityService.GetCurrentUserAsync();
+            
+            var isCurrentUserAdmin = await _identityService.IsCurrentUserAdminAsync();
+            
+            return new UserDetails(user.PersonName, user.Email, user.AvatarPath, isCurrentUserAdmin);
+        }
+        
         public async Task<UserHeaderInfoResult> GetUserHeaderInfoAsync()
         {
             var user = await _identityService.GetCurrentUserAsync();

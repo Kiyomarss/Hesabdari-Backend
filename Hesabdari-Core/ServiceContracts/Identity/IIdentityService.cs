@@ -14,6 +14,8 @@ namespace Hesabdari_Core.ServiceContracts
 
         Task<bool> CurrentUserHasRoleAsync(string roleName);
 
+        Task<bool> UserHasRoleAsync(string userId, string roleName);
+
         bool IsUserLoggedIn();
 
         Task<IList<string>> GetCurrentUserRolesAsync();
@@ -21,6 +23,8 @@ namespace Hesabdari_Core.ServiceContracts
         Task<bool> CurrentUserHasAllRolesAsync(params string[] roleNames);
         
         Task<bool> IsCurrentUserAdminAsync();
+
+        Task<bool> IsUserAdminAsync(string userId);
 
         Task<bool> HasAccessAsync(string requiredPermission);
     }

@@ -31,6 +31,15 @@ namespace Hesabdari_UI.Controllers
 
             return Ok(result);
         }
+        
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetCurrentUserDetails()
+        {
+            var result = await _authService.GetCurrentUserDetailsAsync();
+
+            return Ok(result);
+        }
 
         [HttpPost]
         [Authorize]
