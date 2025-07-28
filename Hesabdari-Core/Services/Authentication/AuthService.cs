@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Hesabdari_Core.ServiceContracts;
 using Hesabdari_Core.ServiceContracts.Base;
+using Hesabdari_Core.ServiceContracts.Storage;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 
@@ -16,14 +17,24 @@ namespace Hesabdari_Core.Services
         private readonly ITokenService _tokenService;
         private readonly IIdentityService _identityService;
         private readonly IConfiguration _configuration;
+        private readonly IImageStorageService _imageStorageService;
 
-        public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITokenService tokenService, IConfiguration configuration, IIdentityService identityService)
+
+        public AuthService(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            ITokenService tokenService,
+            IConfiguration configuration,
+            IIdentityService identityService,
+            IImageStorageService imageStorageService
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
             _identityService = identityService;
             _configuration = configuration;
+            _imageStorageService = imageStorageService;
         }
 
         public async Task SignupAsync(SignupRequest request)
@@ -153,6 +164,17 @@ namespace Hesabdari_Core.Services
             }
 
             return avatarPath;
+        }
+        
+        public async Task DeleteAvatarAsync()
+        {
+            var user = await _identityService.GetCurrentUserAsync();
+
+            await _imageStorageService.DeleteOldImage(user.AvatarPath);
+
+            user.AvatarPath = null;
+
+            await _userManager.UpdateAsync(user);
         }
 
         public virtual async Task<string> SaveNewAvatarFromStreamAsync(Stream fileStream)

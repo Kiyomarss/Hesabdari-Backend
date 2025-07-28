@@ -81,6 +81,14 @@ namespace Hesabdari_UI.Controllers
             return Ok(result);
         }
         
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAvatar()
+        {
+            await _authService.DeleteAvatarAsync();
+
+            return Ok();
+        }
+        
         [HttpGet]
         public async Task<IActionResult> GetUserHeaderInfo()
         {

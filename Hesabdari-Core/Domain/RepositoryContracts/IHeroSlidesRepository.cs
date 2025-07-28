@@ -8,8 +8,6 @@ public interface IHeroSlidesRepository
 
     Task<List<string>> GetHeroSlidesImageUrl();
     Task<List<HeroSlide>> GetHeroSlides();
-
-    Task<bool> HasMultipleHeroSlidesWithImage(string text);
     
     Task<HeroSlide?> FindHeroSlideById(int heroSlideId);
 

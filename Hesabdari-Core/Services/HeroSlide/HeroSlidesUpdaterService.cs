@@ -39,7 +39,6 @@ namespace Services
 
    if (heroSlideUpdateRequest.Image != null)
    {
-    if (!await _heroSlidesRepository.HasMultipleHeroSlidesWithImage(heroSlide.ImageUrl))
      await _imageStorageService.DeleteOldImage(heroSlide.ImageUrl);
 
     var newImageUrl = await _imageStorageService.SaveImageAsync(heroSlideUpdateRequest.Image);

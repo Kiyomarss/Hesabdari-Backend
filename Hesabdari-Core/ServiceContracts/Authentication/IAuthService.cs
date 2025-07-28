@@ -24,5 +24,7 @@ public interface IAuthService
     
     Task<string> UpdateAvatarAsync(Stream avatarStream);
 
+    Task DeleteAvatarAsync();
+
     Task DeleteUserAsync(string userId);
 }
