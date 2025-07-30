@@ -22,6 +22,7 @@ public class HeroSlidesController  : BaseController
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create(HeroSlideUpsertRequest dto)
     {
         var heroSlides = await _heroSlidesAdderService.AddHeroSlide(dto);
@@ -34,6 +35,7 @@ public class HeroSlidesController  : BaseController
     }
 
     [HttpPut]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(HeroSlideUpsertRequest dto)
     {
         var heroSlides = await _heroSlidesUpdaterService.UpdateHeroSlide(dto);
@@ -46,6 +48,7 @@ public class HeroSlidesController  : BaseController
     }
     
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var deleteHeroSlide = await _heroSlidesDeleterService.DeleteHeroSlide(id);
@@ -55,6 +58,7 @@ public class HeroSlidesController  : BaseController
     #region Get
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetHeroSlideById(int id)
     {
         var heroSlide = await _heroSlidesGetterService.GetHeroSlideById(id);
@@ -63,6 +67,7 @@ public class HeroSlidesController  : BaseController
     }
     
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetHeroSlides()
     {
         var heroSlides = await _heroSlidesGetterService.GetHeroSlides();

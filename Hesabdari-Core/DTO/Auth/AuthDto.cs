@@ -16,7 +16,7 @@ public record ChangePasswordRequest(string CurrentPassword, string NewPassword);
 
 public class UpdateAvatarRequest
 {
-    public required IFormFile Avatar { get; set; }
+    public required IFormFile Image { get; set; }
 }
 
 public record UpdatePersonNameRequest(string NewPersonName);

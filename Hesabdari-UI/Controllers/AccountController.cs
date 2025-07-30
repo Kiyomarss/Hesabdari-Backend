@@ -71,10 +71,10 @@ namespace Hesabdari_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateAvatar([FromForm] UpdateAvatarRequest request)
         {
-            if (request.Avatar.Length == 0)
+            if (request.Image.Length == 0)
                 return BadRequest(new MessageResponse("No avatar file provided."));
 
-            await using var stream = request.Avatar.OpenReadStream();
+            await using var stream = request.Image.OpenReadStream();
 
             var result = await _authService.UpdateAvatarAsync(stream);
 

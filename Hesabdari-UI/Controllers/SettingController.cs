@@ -1,6 +1,7 @@
 using Hesabdari_Core.Domain.Entities;
 using Hesabdari_Core.DTO;
 using Hesabdari_Core.DTO.Setting;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceContracts;
 
@@ -18,6 +19,7 @@ public class SettingsController  : BaseController
     }
     
     [HttpPut]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> EditSettingsSlides(SettingsSlidesRequest dto)
     {
         var result = await _settingUpdaterService.UpdateSettingsSlides(dto);
@@ -25,8 +27,9 @@ public class SettingsController  : BaseController
         return Ok(result);
     }
     
-    [HttpPut]
-    public async Task<IActionResult> UpdateLogo(LogoRequest dto)
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> UpdateLogo([FromForm] LogoRequest dto)
     {
         var result = await _settingUpdaterService.UpdateLogo(dto);
         
