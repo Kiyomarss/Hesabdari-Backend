@@ -23,7 +23,7 @@ public class HeroSlidesController  : BaseController
 
     [HttpPost]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Create(HeroSlideUpsertRequest dto)
+    public async Task<IActionResult> Create([FromForm] HeroSlideUpsertRequest dto)
     {
         var heroSlides = await _heroSlidesAdderService.AddHeroSlide(dto);
 
@@ -36,7 +36,7 @@ public class HeroSlidesController  : BaseController
 
     [HttpPut]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Edit(HeroSlideUpsertRequest dto)
+    public async Task<IActionResult> Edit([FromForm] HeroSlideUpsertRequest dto)
     {
         var heroSlides = await _heroSlidesUpdaterService.UpdateHeroSlide(dto);
 

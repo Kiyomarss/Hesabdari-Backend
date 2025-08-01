@@ -18,7 +18,9 @@ public class HeroSlideUpsertRequest
         
     public string? EndDate { get; set; }
     
-    public IFormFile?  Image { get; set; }
+    public IFormFile? ImageDesktop { get; set; }
+    
+    public IFormFile? ImageMobile { get; set; }
     
     public string? RowVersion { get; set; }
 }

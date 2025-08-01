@@ -30,7 +30,7 @@ namespace Repositories
             return _db.SaveChangesAsync();
         }
         
-        public async Task<List<string>> GetHeroSlidesImageUrl()
+        public async Task<List<ImagesDto>> GetHeroSlidesImageUrl()
         {
             var today = DateTime.Now.Date;
 
@@ -40,21 +40,13 @@ namespace Repositories
                                        (b.StartDate == null || b.StartDate.Value.Date <= today) &&
                                        (b.EndDate == null || b.EndDate.Value.Date >= today))
                             .OrderBy(x => x.Order)
-                            .Select(x => x.ImageUrl)
+                            .Select(x => new ImagesDto(x.ImageDesktopWebpUrl, x.ImageDesktopJpgUrl, x.ImageMobileWebpUrl, x.ImageMobileJpgUrl))
                             .ToListAsync();
         }
 
         public async Task<List<HeroSlide>> GetHeroSlides()
         {
             return await _db.Set<HeroSlide>().ToListAsync();
-        }
-        
-        public async Task<bool> HasMultipleHeroSlidesWithImage(string text)
-        {
-            return await _db.Set<HeroSlide>()
-                            .Where(x => x.ImageUrl == text)
-                            .Select(x => x.ImageUrl)
-                            .CountAsync() > 1;
         }
         
         public async Task<HeroSlide?> FindHeroSlideById(int heroSlideId)

@@ -6,5 +6,7 @@ public interface IImageStorageService
 {
     Task<string> SaveImageAsync(IFormFile image);
 
-    Task DeleteOldImage(string? imagePath);
+    Task DeleteOldImagesAsync(params string?[] imagePaths);
+
+    Task<string> ConvertToWebpAsync(IFormFile image);
 }

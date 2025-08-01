@@ -25,20 +25,19 @@ namespace Services
    if (heroSlide == null)
     throw new KeyNotFoundException($"HeroSlide with ID {heroSlideId} does not exist.");
 
-   return new GetHeroSlidesByIdResult(heroSlide.Id, heroSlide.Title, heroSlide.ImageUrl, heroSlide.Order, heroSlide.IsActive, heroSlide.StartDate.ToPersianDate(), heroSlide.EndDate.ToPersianDate());
+   return new GetHeroSlidesByIdResult(heroSlide.Id, heroSlide.Title, heroSlide.ImageMobileJpgUrl, heroSlide.Order, heroSlide.IsActive, heroSlide.StartDate.ToPersianDate(), heroSlide.EndDate.ToPersianDate());
   }
 
   public virtual async Task<List<GetHeroSlidesResult>> GetHeroSlides()
   {
    var heroSlides = await _heroSlidesRepository.GetHeroSlides();
 
-   return heroSlides.Select(x => new GetHeroSlidesResult(x.Id, x.Title, x.ImageUrl, x.Order, x.IsActive, x.StartDate.ToPersianDate(), x.EndDate.ToPersianDate())).ToList();
+   return heroSlides.Select(x => new GetHeroSlidesResult(x.Id, x.Title, x.ImageMobileJpgUrl, x.Order, x.IsActive, x.StartDate.ToPersianDate(), x.EndDate.ToPersianDate())).ToList();
   }
   
   public virtual async Task<ImagesResponse> GetHeroSlidesImageUrl()
   {
    var images = await _heroSlidesRepository.GetHeroSlidesImageUrl();
-
    return new ImagesResponse(images);
   }
  }

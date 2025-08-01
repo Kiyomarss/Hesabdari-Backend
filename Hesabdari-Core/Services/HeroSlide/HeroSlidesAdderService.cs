@@ -31,9 +31,20 @@ namespace Services
   public async Task<GetHeroSlidesResult> AddHeroSlide(HeroSlideUpsertRequest heroSlideAddRequest)
   {
    var heroSlide = new HeroSlide();
+
+   if (heroSlideAddRequest.ImageDesktop != null)
+   {
+    heroSlide.ImageDesktopJpgUrl = await _imageStorageService.SaveImageAsync(heroSlideAddRequest.ImageDesktop);
+    
+    heroSlide.ImageDesktopWebpUrl = await _imageStorageService.ConvertToWebpAsync(heroSlideAddRequest.ImageDesktop);
+   }
    
-   if (heroSlideAddRequest.Image != null)
-    heroSlide.ImageUrl = await _imageStorageService.SaveImageAsync(heroSlideAddRequest.Image);
+   if (heroSlideAddRequest.ImageMobile != null)
+   {
+    heroSlide.ImageMobileJpgUrl = await _imageStorageService.SaveImageAsync(heroSlideAddRequest.ImageMobile);
+    
+    heroSlide.ImageMobileWebpUrl = await _imageStorageService.ConvertToWebpAsync(heroSlideAddRequest.ImageMobile);
+   }
    
    if (heroSlideAddRequest.StartDate != null)
     heroSlide.StartDate = DateTimeUtils.TryParsePersianDate(heroSlideAddRequest.StartDate);
@@ -49,7 +60,7 @@ namespace Services
    
    var slide  = await _heroSlidesRepository.AddHeroSlide(heroSlide);
 
-   return new GetHeroSlidesResult(slide.Id, slide.Title, slide.ImageUrl, slide.Order, slide.IsActive, slide.StartDate.ToPersianDate(), slide.EndDate.ToPersianDate());
+   return new GetHeroSlidesResult(slide.Id, slide.Title, slide.ImageMobileJpgUrl, slide.Order, slide.IsActive, slide.StartDate.ToPersianDate(), slide.EndDate.ToPersianDate());
   }
  }
 }

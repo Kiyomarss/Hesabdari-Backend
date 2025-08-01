@@ -36,15 +36,25 @@ namespace Services
    
    if (heroSlide == null)
     throw new InvalidOperationException("HeroSlide with the given ID does not exist.");
-
-   if (heroSlideUpdateRequest.Image != null)
+   
+   if (heroSlideUpdateRequest.ImageMobile != null)
    {
-     await _imageStorageService.DeleteOldImage(heroSlide.ImageUrl);
+    await _imageStorageService.DeleteOldImagesAsync(heroSlide.ImageMobileJpgUrl, heroSlide.ImageMobileWebpUrl);
 
-    var newImageUrl = await _imageStorageService.SaveImageAsync(heroSlideUpdateRequest.Image);
-    heroSlide.ImageUrl = newImageUrl;
+    heroSlide.ImageMobileJpgUrl = await _imageStorageService.SaveImageAsync(heroSlideUpdateRequest.ImageMobile);
+    
+    heroSlide.ImageMobileWebpUrl = await _imageStorageService.ConvertToWebpAsync(heroSlideUpdateRequest.ImageMobile);
    }
-
+      
+   if (heroSlideUpdateRequest.ImageDesktop != null)
+   {
+    await _imageStorageService.DeleteOldImagesAsync(heroSlide.ImageDesktopJpgUrl, heroSlide.ImageDesktopWebpUrl);
+    
+    heroSlide.ImageDesktopJpgUrl = await _imageStorageService.SaveImageAsync(heroSlideUpdateRequest.ImageDesktop);
+    
+    heroSlide.ImageDesktopWebpUrl = await _imageStorageService.ConvertToWebpAsync(heroSlideUpdateRequest.ImageDesktop);
+   }
+   
    heroSlide.Title = heroSlideUpdateRequest.Title;
    //heroSlideById.Link = "Link";
    heroSlide.Order = heroSlideUpdateRequest.Order;
@@ -57,7 +67,7 @@ namespace Services
 
    await _heroSlidesRepository.UpdateHeroSlide();
 
-   return new GetHeroSlidesResult(heroSlide.Id, heroSlide.Title, heroSlide.ImageUrl, heroSlide.Order, heroSlide.IsActive, heroSlide.StartDate.ToPersianDate(), heroSlide.EndDate.ToPersianDate());
+   return new GetHeroSlidesResult(heroSlide.Id, heroSlide.Title, heroSlide.ImageMobileJpgUrl, heroSlide.Order, heroSlide.IsActive, heroSlide.StartDate.ToPersianDate(), heroSlide.EndDate.ToPersianDate());
   }
  }
 }

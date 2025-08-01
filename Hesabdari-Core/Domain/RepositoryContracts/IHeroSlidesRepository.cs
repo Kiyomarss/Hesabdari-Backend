@@ -1,4 +1,5 @@
 using Hesabdari_Core.Domain.Entities;
+using Hesabdari_Core.DTO;
 
 namespace RepositoryContracts;
 
@@ -6,7 +7,8 @@ public interface IHeroSlidesRepository
 {
     Task<HeroSlide> AddHeroSlide(HeroSlide heroSlide);
 
-    Task<List<string>> GetHeroSlidesImageUrl();
+    Task<List<ImagesDto>> GetHeroSlidesImageUrl();
+    
     Task<List<HeroSlide>> GetHeroSlides();
     
     Task<HeroSlide?> FindHeroSlideById(int heroSlideId);

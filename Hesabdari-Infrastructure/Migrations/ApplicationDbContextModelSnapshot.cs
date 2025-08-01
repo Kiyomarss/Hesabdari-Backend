@@ -230,9 +230,21 @@ namespace Hesabdari_Infrastructure.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("ImageDesktopJpgUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+                    
+                    b.Property<string>("ImageDesktopWebpUrl")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(max)");
+                    
+                    b.Property<string>("ImageMobileJpgUrl")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(max)");
+                    
+                    b.Property<string>("ImageMobileWebpUrl")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");

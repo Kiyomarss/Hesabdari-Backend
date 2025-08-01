@@ -49,7 +49,7 @@ namespace Services
 
             var setting = await _settingRepository.GetSetting();
 
-            await _imageStorageService.DeleteOldImage(setting.LogoImageUrl);
+            await _imageStorageService.DeleteOldImagesAsync(setting.LogoImageUrl);
 
             setting.LogoImageUrl = await _imageStorageService.SaveImageAsync(result.Image);
 

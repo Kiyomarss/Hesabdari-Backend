@@ -170,7 +170,7 @@ namespace Hesabdari_Core.Services
         {
             var user = await _identityService.GetCurrentUserAsync();
 
-            await _imageStorageService.DeleteOldImage(user.AvatarPath);
+            await _imageStorageService.DeleteOldImagesAsync(user.AvatarPath);
 
             user.AvatarPath = null;
 

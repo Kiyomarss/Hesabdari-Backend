@@ -9,7 +9,13 @@ public class HeroSlide
     
     public string Title { get; set; }
     
-    public string ImageUrl { get; set; }
+    public string ImageDesktopJpgUrl { get; set; }
+    
+    public string ImageDesktopWebpUrl { get; set; }
+    
+    public string ImageMobileJpgUrl { get; set; }
+    
+    public string ImageMobileWebpUrl { get; set; }  
     
     public string? Link { get; set; }
     
