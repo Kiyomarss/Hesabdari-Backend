@@ -20,6 +20,7 @@ namespace Hesabdari_Infrastructure.DbContext
   public DbSet<Booking> Bookings { get; set; }
   public DbSet<Guest> Guests { get; set; }
   public DbSet<Setting> Settings { get; set; }
+  public DbSet<Testimonial> Testimonials { get; set; }
 
   public new EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class => base.Entry(entity);
   
@@ -31,6 +32,7 @@ namespace Hesabdari_Infrastructure.DbContext
    modelBuilder.Entity<HeroSlide>().ToTable("HeroSlides");
    modelBuilder.Entity<Guest>().ToTable("Guests");
    modelBuilder.Entity<Setting>().ToTable("Setting");
+   modelBuilder.Entity<Testimonial>().ToTable("Testimonials");
    
    modelBuilder.Entity<Booking>(entity =>
    {

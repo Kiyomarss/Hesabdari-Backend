@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <Folder Include="ServiceContracts\Authorization\" />
-      <Folder Include="ServiceContracts\Guest\" />
       <Folder Include="Services\Authorization\" />
     </ItemGroup>
 

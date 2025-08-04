@@ -54,6 +54,12 @@ namespace Hesabdari_UI
    services.AddScoped<IHeroSlidesUpdaterService, HeroSlidesUpdaterService>();
    services.AddScoped<IHeroSlidesAdderService, HeroSlidesAdderService>();
    
+   services.AddScoped<ITestimonialsRepository, TestimonialRepository>();
+   services.AddScoped<ITestimonialsGetterService, TestimonialsGetterService>();
+   services.AddScoped<ITestimonialsDeleterService, TestimonialsDeleterService>();
+   services.AddScoped<ITestimonialsUpdaterService, TestimonialsUpdaterService>();
+   services.AddScoped<ITestimonialsAdderService, TestimonialsAdderService>();
+   
    services.AddScoped<ISettingRepository, SettingRepository>();
    services.AddScoped<ISettingGetterService, SettingGetterService>();
    services.AddScoped<ISettingUpdaterService, SettingUpdaterService>();

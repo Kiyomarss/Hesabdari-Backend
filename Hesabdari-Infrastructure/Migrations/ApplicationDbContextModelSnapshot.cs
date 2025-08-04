@@ -272,6 +272,37 @@ namespace Hesabdari_Infrastructure.Migrations
 
                     b.ToTable("HeroSlides", (string)null);
                 });
+            
+                modelBuilder.Entity("Hesabdari_Core.Domain.Entities.Testimonial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    
+                    b.Property<string>("PositionAndCompany")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(max)");
+                    
+                    b.Property<string>("Content")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(max)");
+                    
+                    b.Property<string>("ImageUrl")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Testimonials", (string)null);
+                });
 
             modelBuilder.Entity("Hesabdari_Core.Domain.Entities.Setting", b =>
                 {
