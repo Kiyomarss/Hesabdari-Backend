@@ -53,7 +53,7 @@ namespace Services
             await _testimonialsRepository.UpdateTestimonial();
         }
         
-        public async Task<ItemResult<string>> UpdateImageTestimonial(FileUploadDto dto)
+        public async Task<ItemResult<UpdateImageResult>> UpdateImageTestimonial(FileUploadDto dto)
         {
             var testimonial = await _testimonialsRepository.FindTestimonialById(dto.Id);
 
@@ -62,11 +62,11 @@ namespace Services
 
             await _imageStorageService.DeleteOldImagesAsync(testimonial.ImageUrl);
 
-            testimonial.ImageUrl = await _imageStorageService.SaveImageAsync(dto.File);
+            testimonial.ImageUrl = await _imageStorageService.SaveImageAsync(dto.Image);
 
             await _testimonialsRepository.UpdateTestimonial();
 
-            return new ItemResult<string>(testimonial.ImageUrl);
+            return new ItemResult<UpdateImageResult>(new UpdateImageResult(testimonial.Id, testimonial.ImageUrl));
         }
     }
 }

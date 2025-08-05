@@ -6,5 +6,5 @@ public class FileUploadDto
 {
     public int Id { get; set; }
 
-    public required IFormFile File { get; set; }
+    public required IFormFile Image { get; set; }
 }

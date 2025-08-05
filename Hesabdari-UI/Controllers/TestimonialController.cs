@@ -59,9 +59,9 @@ public class TestimonialsController  : BaseController
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateImageTestimonial([FromForm] FileUploadDto dto)
     {
-        await _testimonialsesUpdaterService.UpdateImageTestimonial(dto);
+        var result = await _testimonialsesUpdaterService.UpdateImageTestimonial(dto);
 
-        return Ok();
+        return Ok(result);
     }
 
     [HttpGet]
