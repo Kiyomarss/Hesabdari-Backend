@@ -4,7 +4,7 @@ namespace Hesabdari_Core.DTO;
 
 public class TestimonialRequest
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
     
     public string PositionAndCompany { get; set; }
     
@@ -13,6 +13,4 @@ public class TestimonialRequest
     public int Order { get; set; }
     
     public bool IsActive { get; set; }
-    
-    public IFormFile? Image { get; set; }
 }

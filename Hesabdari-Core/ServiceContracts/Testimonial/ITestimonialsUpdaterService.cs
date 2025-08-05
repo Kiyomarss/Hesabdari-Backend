@@ -8,5 +8,7 @@ namespace ServiceContracts
         Task<ItemResult<TestimonialResult>> UpdateTestimonial(TestimonialRequest testimonialUpdateRequest);
 
         Task RemoveImageTestimonial(int testimonialId);
+
+        Task<ItemResult<string>> UpdateImageTestimonial(FileUploadDto dto);
     }
 }

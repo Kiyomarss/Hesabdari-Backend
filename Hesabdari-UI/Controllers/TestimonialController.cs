@@ -1,5 +1,6 @@
 using ContactsManager.Core.DTO;
 using Hesabdari_Core.DTO;
+using Hesabdari_Core.DTO.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceContracts;
@@ -23,7 +24,7 @@ public class TestimonialsController  : BaseController
 
     [HttpPost]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Create([FromForm] TestimonialRequest dto)
+    public async Task<IActionResult> Create(TestimonialRequest dto)
     {
         var testimonials = await _testimonialsAdderService.AddTestimonial(dto);
 
@@ -32,7 +33,7 @@ public class TestimonialsController  : BaseController
 
     [HttpPut]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Edit([FromForm] TestimonialRequest dto)
+    public async Task<IActionResult> Edit(TestimonialRequest dto)
     {
         var testimonials = await _testimonialsesUpdaterService.UpdateTestimonial(dto);
 
@@ -52,6 +53,14 @@ public class TestimonialsController  : BaseController
     public async Task<IActionResult> RemoveImageTestimonial(int id)
     {
         await _testimonialsesUpdaterService.RemoveImageTestimonial(id);
+        return Ok();
+    }
+    
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> UpdateImageTestimonial([FromForm] FileUploadDto dto)
+    {
+        await _testimonialsesUpdaterService.UpdateImageTestimonial(dto);
+
         return Ok();
     }
 

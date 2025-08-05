@@ -24,20 +24,15 @@ namespace Services
             if (testimonialUpdateRequest == null)
                 throw new InvalidOperationException("Testimonial with the given ID does not exist.");
 
-            var testimonial = await _testimonialsRepository.FindTestimonialById(testimonialUpdateRequest.Id);
+            var testimonial = await _testimonialsRepository.FindTestimonialById((int)testimonialUpdateRequest.Id);
 
             if (testimonial == null)
                 throw new InvalidOperationException("Testimonial with the given ID does not exist.");
 
-            if (testimonialUpdateRequest.Image != null)
-            {
-                await _imageStorageService.DeleteOldImagesAsync(testimonial.ImageUrl);
-
-                testimonial.ImageUrl = await _imageStorageService.SaveImageAsync(testimonialUpdateRequest.Image);
-            }
-
             testimonial.PositionAndCompany = testimonialUpdateRequest.PositionAndCompany;
             testimonial.Content = testimonialUpdateRequest.Content;
+            testimonial.Order = testimonialUpdateRequest.Order;
+            testimonial.IsActive = testimonialUpdateRequest.IsActive;
 
             await _testimonialsRepository.UpdateTestimonial();
 
@@ -56,6 +51,22 @@ namespace Services
             testimonial.ImageUrl = null;
 
             await _testimonialsRepository.UpdateTestimonial();
+        }
+        
+        public async Task<ItemResult<string>> UpdateImageTestimonial(FileUploadDto dto)
+        {
+            var testimonial = await _testimonialsRepository.FindTestimonialById(dto.Id);
+
+            if (testimonial == null)
+                throw new KeyNotFoundException($"testimonial with ID {dto.Id} does not exist.");
+
+            await _imageStorageService.DeleteOldImagesAsync(testimonial.ImageUrl);
+
+            testimonial.ImageUrl = await _imageStorageService.SaveImageAsync(dto.File);
+
+            await _testimonialsRepository.UpdateTestimonial();
+
+            return new ItemResult<string>(testimonial.ImageUrl);
         }
     }
 }

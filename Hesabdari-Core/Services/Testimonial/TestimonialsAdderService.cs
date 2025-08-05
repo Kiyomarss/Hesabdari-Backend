@@ -28,17 +28,14 @@ namespace Services
         {
             var testimonial = new Testimonial();
 
-            if (testimonialAddRequest.Image != null)
-            {
-                testimonial.ImageUrl = await _imageStorageService.SaveImageAsync(testimonialAddRequest.Image);
-            }
-
             testimonial.PositionAndCompany = testimonialAddRequest.PositionAndCompany;
             testimonial.Content = testimonialAddRequest.Content;
+            testimonial.Order = testimonialAddRequest.Order;
+            testimonial.IsActive = testimonialAddRequest.IsActive;
 
-            var slide = await _testimonialsRepository.AddTestimonial(testimonial);
+            await _testimonialsRepository.AddTestimonial(testimonial);
 
-            return new ItemResult<TestimonialResult>(new TestimonialResult(slide.Id, slide.PositionAndCompany, slide.Content, slide.ImageUrl, slide.Order, slide.IsActive));
+            return new ItemResult<TestimonialResult>(new TestimonialResult(testimonial.Id, testimonial.PositionAndCompany, testimonial.Content, testimonial.ImageUrl, testimonial.Order, testimonial.IsActive));
         }
     }
 }
