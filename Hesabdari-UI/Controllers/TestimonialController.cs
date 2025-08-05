@@ -47,11 +47,11 @@ public class TestimonialsController  : BaseController
         return Ok();
     }
     
-    [HttpDelete("{id}")]
+    [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> DeleteImageTestimonial(int id)
+    public async Task<IActionResult> RemoveImageTestimonial(int id)
     {
-        await _testimonialsesUpdaterService.DeleteImageTestimonial(id);
+        await _testimonialsesUpdaterService.RemoveImageTestimonial(id);
         return Ok();
     }
 

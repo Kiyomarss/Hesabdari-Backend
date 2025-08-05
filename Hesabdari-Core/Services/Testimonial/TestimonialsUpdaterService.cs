@@ -44,7 +44,7 @@ namespace Services
             return new ItemResult<TestimonialResult>(new TestimonialResult(testimonial.Id, testimonial.PositionAndCompany, testimonial.Content, testimonial.ImageUrl, testimonial.Order, testimonial.IsActive));
         }
 
-        public async Task DeleteImageTestimonial(int testimonialId)
+        public async Task RemoveImageTestimonial(int testimonialId)
         {
             var testimonial = await _testimonialsRepository.FindTestimonialById(testimonialId);
 
