@@ -6,11 +6,11 @@ using RepositoryContracts;
 
 namespace Repositories
 {
-    public class TestimonialRepository : RepositoryBase, ITestimonialsRepository
+    public class TestimonialsRepository : RepositoryBase, ITestimonialsRepository
     {
         private readonly IApplicationDbContext _db;
 
-        public TestimonialRepository(IApplicationDbContext db) : base(db)
+        public TestimonialsRepository(IApplicationDbContext db) : base(db)
         {
             _db = db;
         }
