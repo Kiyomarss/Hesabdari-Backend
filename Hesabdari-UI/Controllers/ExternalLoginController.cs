@@ -63,3 +63,7 @@ public class ExternalLoginController : BaseController
         return Ok(new LoginResult(token));
     }
 }
+
+public record RemoveExternalLoginRequest(string UserId, string LoginProvider, string ProviderKey);
+
+public record ExternalLoginRequest(string LoginProvider, string ProviderKey, string ProviderDisplayName, String? EmailFromProvider);

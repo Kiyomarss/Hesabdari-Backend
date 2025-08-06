@@ -17,8 +17,6 @@ namespace Hesabdari_Infrastructure.DbContext
   
   //TODO: خطوط زیر نباید حذف شود زیر اجرای مایگریشن به مشکل می‌خورد
   public DbSet<HeroSlide> HeroSlides { get; set; }
-  public DbSet<Booking> Bookings { get; set; }
-  public DbSet<Guest> Guests { get; set; }
   public DbSet<Setting> Settings { get; set; }
   public DbSet<Testimonial> Testimonials { get; set; }
   public DbSet<TeamMember> TeamMembers { get; set; }
@@ -29,19 +27,10 @@ namespace Hesabdari_Infrastructure.DbContext
   {
    base.OnModelCreating(modelBuilder);
 
-   modelBuilder.Entity<Booking>().ToTable("Bookings");
    modelBuilder.Entity<HeroSlide>().ToTable("HeroSlides");
-   modelBuilder.Entity<Guest>().ToTable("Guests");
    modelBuilder.Entity<Setting>().ToTable("Setting");
    modelBuilder.Entity<Testimonial>().ToTable("Testimonials");
    modelBuilder.Entity<TeamMember>().ToTable("TeamMembers");
-   
-   modelBuilder.Entity<Booking>(entity =>
-   {
-    entity.HasOne(b => b.Guest)
-     .WithMany()
-     .HasForeignKey(b => b.GuestId);
-   });
   }
  }
 }

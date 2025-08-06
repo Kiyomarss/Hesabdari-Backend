@@ -41,13 +41,7 @@ namespace Hesabdari_UI
    services.AddScoped<IIdentityService, IdentityService>();
    services.AddScoped<IUserLoginService, UserLoginService>();
    services.AddScoped<IUserTokenService, UserTokenService>();
-
-
-   services.AddScoped<IBookingsRepository, BookingsRepository>();
-   services.AddScoped<IBookingsGetterService, BookingsGetterService>();
-   services.AddScoped<IBookingsDeleterService, BookingsDeleterService>();
-   services.AddScoped<IBookingsUpdaterService, BookingsUpdaterService>();
-
+   
    services.AddScoped<IHeroSlidesRepository, HeroSlidesRepository>();
    services.AddScoped<IHeroSlidesGetterService, HeroSlidesGetterService>();
    services.AddScoped<IHeroSlidesDeleterService, HeroSlidesDeleterService>();
