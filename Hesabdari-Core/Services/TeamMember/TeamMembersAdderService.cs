@@ -30,6 +30,7 @@ namespace Services
 
             teamMember.FullName = teamMemberAddRequest.FullName;
             teamMember.Position = teamMemberAddRequest.Position;
+            teamMember.Bio = teamMemberAddRequest.Bio;
             teamMember.Order = teamMemberAddRequest.Order;
             teamMember.IsActive = teamMemberAddRequest.IsActive;
 
