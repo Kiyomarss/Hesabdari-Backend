@@ -1,6 +1,6 @@
-namespace Hesabdari_Core.Constant;
+namespace Hesabdari_Core.Constants;
 
-public abstract class Constant
+public abstract class Constants
 {
     public abstract class RabbitMq
     {

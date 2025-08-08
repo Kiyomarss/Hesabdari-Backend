@@ -113,12 +113,12 @@ namespace Hesabdari_Core.Services
 
         public async Task<bool> IsCurrentUserAdminAsync()
         {
-            return await CurrentUserHasRoleAsync(Constant.Constant.Role.Admin);
+            return await CurrentUserHasRoleAsync(Constants.Constants.Role.Admin);
         }
         
         public async Task<bool> IsUserAdminAsync(string userId)
         {
-            return await UserHasRoleAsync(userId, Constant.Constant.Role.Admin);
+            return await UserHasRoleAsync(userId, Constants.Constants.Role.Admin);
         }
         
         public async Task<bool> HasAccessAsync(string requiredPermission)
@@ -129,7 +129,7 @@ namespace Hesabdari_Core.Services
 
             var claims = await _userManager.GetClaimsAsync(user);
 
-            return claims.Any(c => c is { Type: Constant.Constant.Claims.FullAccess, Value: "true" }) || claims.Any(c => c.Type == "Permission" && c.Value == requiredPermission);
+            return claims.Any(c => c is { Type: Constants.Constants.Claims.FullAccess, Value: "true" }) || claims.Any(c => c.Type == "Permission" && c.Value == requiredPermission);
         }
     }
 }
