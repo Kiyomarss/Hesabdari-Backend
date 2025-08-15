@@ -3,19 +3,19 @@ using Hesabdari_Core.DTO;
 
 namespace RepositoryContracts;
 
-public interface ITestimonialsRepository
+public interface ITeamMembersRepository
 {
-    Task<Testimonial> AddTestimonial(Testimonial testimonial);
+    Task<TeamMember> AddTeamMember(TeamMember teamMember);
 
-    Task UpdateTestimonial();
+    Task UpdateTeamMember();
 
-    Task<List<Testimonial>> GetTestimonials();
+    Task<List<TeamMember>> GetTeamMembers();
 
-    Task<List<Testimonial>> GetDashboardTestimonials();
+    Task<List<TeamMember>> GetDashboardTeamMembers();
     
-    Task<Testimonial?> FindTestimonialById(int testimonialId);
+    Task<TeamMember?> FindTeamMemberById(int teamMemberId);
 
-    Task<bool> DeleteTestimonial(int testimonialId);
+    Task<bool> DeleteTeamMember(int teamMemberId);
     
-    Task<bool> DeleteImageTestimonial(int testimonialId);
+    Task<bool> DeleteImageTeamMember(int teamMemberId);
 }

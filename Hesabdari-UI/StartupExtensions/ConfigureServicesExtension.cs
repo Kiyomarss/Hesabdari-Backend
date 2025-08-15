@@ -60,6 +60,12 @@ namespace Hesabdari_UI
    services.AddScoped<ITeamMembersUpdaterService, TeamMembersUpdaterService>();
    services.AddScoped<ITeamMembersAdderService, TeamMembersAdderService>();
    
+   services.AddScoped<IConsultationRequestsRepository, ConsultationRequestsRepository>();
+   services.AddScoped<IConsultationRequestsGetterService, ConsultationRequestsGetterService>();
+   services.AddScoped<IConsultationRequestsDeleterService, ConsultationRequestsDeleterService>();
+   services.AddScoped<IConsultationRequestsUpdaterService, ConsultationRequestsUpdaterService>();
+   services.AddScoped<IConsultationRequestsAdderService, ConsultationRequestsAdderService>();
+   
    services.AddScoped<ISettingRepository, SettingRepository>();
    services.AddScoped<ISettingGetterService, SettingGetterService>();
    services.AddScoped<ISettingUpdaterService, SettingUpdaterService>();

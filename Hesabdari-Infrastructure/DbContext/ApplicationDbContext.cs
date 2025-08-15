@@ -20,6 +20,7 @@ namespace Hesabdari_Infrastructure.DbContext
   public DbSet<Setting> Settings { get; set; }
   public DbSet<Testimonial> Testimonials { get; set; }
   public DbSet<TeamMember> TeamMembers { get; set; }
+  public DbSet<ConsultationRequest> ConsultationRequests { get; set; }
 
   public new EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class => base.Entry(entity);
   
@@ -31,6 +32,7 @@ namespace Hesabdari_Infrastructure.DbContext
    modelBuilder.Entity<Setting>().ToTable("Setting");
    modelBuilder.Entity<Testimonial>().ToTable("Testimonials");
    modelBuilder.Entity<TeamMember>().ToTable("TeamMembers");
+   modelBuilder.Entity<ConsultationRequest>().ToTable("ConsultationRequests");
   }
  }
 }

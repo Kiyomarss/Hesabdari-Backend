@@ -339,6 +339,53 @@ namespace Hesabdari_Infrastructure.Migrations
 
                     b.ToTable("TeamMembers", (string)null);
                 });
+                
+                modelBuilder.Entity("Hesabdari_Core.Domain.Entities.ConsultationRequest", b =>
+                {
+                    b.Property<long>("Id")
+                     .ValueGeneratedOnAdd()
+                     .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    
+                    b.Property<string>("FullName")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(100)");
+                    
+                    b.Property<string>("CompanyName")
+                     .HasColumnType("nvarchar(150)");
+                    
+                    b.Property<string>("Email")
+                     .HasColumnType("nvarchar(255)");
+                    
+                    b.Property<string>("PhoneNumber")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(30)");
+                    
+                    b.Property<string>("Description")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(1000)");
+                    
+                    b.Property<string>("ServiceType")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsRead")
+                     .IsRequired()
+                     .HasColumnType("bit");
+
+                    b.Property<bool>("IsStarred")
+                     .IsRequired()
+                     .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreateAt")
+                     .IsRequired()
+                     .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConsultationRequests", (string)null);
+                });
 
             modelBuilder.Entity("Hesabdari_Core.Domain.Entities.Setting", b =>
                 {
