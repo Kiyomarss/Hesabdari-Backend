@@ -37,7 +37,15 @@ public class ConsultationRequestsController  : BaseController
         return Ok();
     }
     
-    [HttpPut]
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Delete(long id)
+    {
+        await _consultationRequestsDeleterService.DeleteConsultationRequests([id]);
+        return Ok();
+    }
+    
+    [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> SetStarredStatus(long id)
     {

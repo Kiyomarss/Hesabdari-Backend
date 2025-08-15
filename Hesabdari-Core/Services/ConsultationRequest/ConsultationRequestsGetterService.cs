@@ -59,9 +59,10 @@ namespace Services
             return new ItemsResult<ConsultationRequestResultDto>(resultDtos);
         }
 
-        public virtual async Task<int> GetUnreadCount()
+        public virtual async Task<ItemResult<int>> GetUnreadCount()
         {
-            return await _consultationRequestsRepository.GetUnreadCount();
+            var count = await _consultationRequestsRepository.GetUnreadCount();
+            return new ItemResult<int>(count); 
         }
     }
 }

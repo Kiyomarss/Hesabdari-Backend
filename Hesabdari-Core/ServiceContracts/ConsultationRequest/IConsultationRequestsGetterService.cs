@@ -8,7 +8,7 @@ namespace ServiceContracts
         Task<ItemsResult<ConsultationRequestResultDto>> GetConsultationRequests();
 
         Task<ItemsResult<ConsultationRequestResultDto>> GetStarredConsultationRequests();
-        
-        Task<int> GetUnreadCount();
+
+        Task<ItemResult<int>> GetUnreadCount();
     }
 }
