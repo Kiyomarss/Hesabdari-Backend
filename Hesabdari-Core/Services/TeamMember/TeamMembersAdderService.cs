@@ -1,12 +1,8 @@
 ﻿using Hesabdari_Core.Domain.Entities;
 using Hesabdari_Core.DTO;
-using Hesabdari_Core.DTO.Base;
-using Hesabdari_Core.ServiceContracts;
 using Hesabdari_Core.ServiceContracts.Storage;
-using Hesabdari_Core.Utils;
 using ServiceContracts;
 using RepositoryContracts;
-using Microsoft.Extensions.Logging;
 
 namespace Services
 {

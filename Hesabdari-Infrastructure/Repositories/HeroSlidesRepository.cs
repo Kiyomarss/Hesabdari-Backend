@@ -1,6 +1,5 @@
 using Hesabdari_Core.Domain.Entities;
 using Hesabdari_Core.DTO;
-using Hesabdari_Infrastructure.DbContext;
 using Hesabdari_Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using RepositoryContracts;

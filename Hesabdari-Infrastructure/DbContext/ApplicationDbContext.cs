@@ -1,6 +1,5 @@
 ﻿using ContactsManager.Core.Domain.IdentityEntities;
 using Hesabdari_Core.Domain.Entities;
-using Hesabdari_Core.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;

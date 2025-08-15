@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Http;
-
 namespace Hesabdari_Core.DTO;
 
 public class TestimonialRequest

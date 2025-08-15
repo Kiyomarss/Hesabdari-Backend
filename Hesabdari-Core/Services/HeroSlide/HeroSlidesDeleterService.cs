@@ -1,5 +1,4 @@
-﻿using Hesabdari_Core.ServiceContracts;
-using Hesabdari_Core.ServiceContracts.Storage;
+﻿using Hesabdari_Core.ServiceContracts.Storage;
 using ServiceContracts;
 using RepositoryContracts;
 using Microsoft.Extensions.Logging;

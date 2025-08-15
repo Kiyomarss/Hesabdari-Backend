@@ -1,5 +1,4 @@
-﻿using Hesabdari_Core.ServiceContracts.Storage;
-using ServiceContracts;
+﻿using ServiceContracts;
 using RepositoryContracts;
 
 namespace Services

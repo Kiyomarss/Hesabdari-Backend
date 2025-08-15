@@ -1,6 +1,4 @@
-﻿using Hesabdari_Core.DTO;
-using Hesabdari_Core.DTO.Base;
-using Hesabdari_Core.DTO.ConsultationRequest;
+﻿using Hesabdari_Core.DTO.ConsultationRequest;
 
 namespace ServiceContracts
 {

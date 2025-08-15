@@ -1,7 +1,4 @@
-﻿using Hesabdari_Core.DTO;
-using Hesabdari_Core.DTO.Base;
-using Hesabdari_Core.ServiceContracts.Storage;
-using ServiceContracts;
+﻿using ServiceContracts;
 using RepositoryContracts;
 
 namespace Services

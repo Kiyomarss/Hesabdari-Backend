@@ -6,7 +6,6 @@ using Hesabdari_Core.Services;
 using Hesabdari_Core.Services.Base;
 using Hesabdari_Core.Services.Storage;
 using Hesabdari_Infrastructure.DbContext;
-using Hesabdari_Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;

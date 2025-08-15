@@ -1,4 +1,3 @@
-using System.Configuration;
 using System.Text;
 using Hesabdari_Infrastructure.DbContext;
 using Hesabdari_UI;

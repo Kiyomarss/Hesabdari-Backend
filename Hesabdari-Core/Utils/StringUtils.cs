@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Hesabdari_Core.Constants;
+﻿using Hesabdari_Core.Constants;
 
 namespace Hesabdari_Core.Utils
 {
