@@ -28,8 +28,8 @@ namespace Services
                                                                      x.PhoneNumber,
                                                                      x.Description,
                                                                      x.ServiceType,
-                                                                     x.IsStarred,
                                                                      x.IsRead,
+                                                                     x.IsStarred,
                                                                      ((DateTime?)x.CreateAt).ToPersianDate()
                                                                     ))
                        .ToList();
@@ -50,8 +50,8 @@ namespace Services
                                                                      x.PhoneNumber,
                                                                      x.Description,
                                                                      x.ServiceType,
-                                                                     x.IsStarred,
                                                                      x.IsRead,
+                                                                     x.IsStarred,
                                                                      ((DateTime?)x.CreateAt).ToPersianDate()
                                                                     ))
                        .ToList();
