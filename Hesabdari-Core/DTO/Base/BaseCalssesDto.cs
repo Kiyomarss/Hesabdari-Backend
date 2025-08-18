@@ -1,6 +1,6 @@
 ﻿namespace Hesabdari_Core.DTO;
 
-public record ItemsResult<T>(List<T> Data);
+public record ItemsResult<T>(List<T> Data, int? Count = null);
 
 public record ItemResult<T>(T Data);
 

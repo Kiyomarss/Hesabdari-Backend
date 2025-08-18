@@ -5,7 +5,7 @@ namespace ServiceContracts
 {
     public interface IConsultationRequestsGetterService
     {
-        Task<ItemsResult<ConsultationRequestResultDto>> GetConsultationRequests();
+        Task<ItemsResult<ConsultationRequestResultDto>> GetConsultationRequests(PaginationRequestDto dto);
 
         Task<ItemsResult<ConsultationRequestResultDto>> GetStarredConsultationRequests();
 

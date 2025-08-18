@@ -1,4 +1,5 @@
 using Hesabdari_Core.Domain.Entities;
+using Hesabdari_Core.DTO.ConsultationRequest;
 using Hesabdari_Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using RepositoryContracts;
@@ -26,10 +27,42 @@ namespace Repositories
             return _db.SaveChangesAsync();
         }
 
-        public async Task<List<ConsultationRequest>> GetConsultationRequests()
+        public async Task<List<ConsultationRequest>> GetConsultationRequests(PaginationRequestDto dto)
         {
-            return await _db.Set<ConsultationRequest>()
-                            .OrderByDescending(x => x.CreateAt).ToListAsync();
+            IQueryable<ConsultationRequest> query = _db.Set<ConsultationRequest>();
+
+            if (!string.IsNullOrWhiteSpace(dto.Status))
+            {
+                query = dto.Status switch
+                {
+                    "isStarred" => query.Where(r => r.IsStarred),
+                    "new"       => query.Where(r => !r.IsRead),
+                    _           => query
+                };
+            }
+
+            return await query
+                         .OrderByDescending(r => r.CreateAt)
+                         .Skip((dto.Page - 1) * dto.PageSize)
+                         .Take(dto.PageSize)
+                         .ToListAsync();
+        }
+
+        public async Task<int> GetConsultationRequestsCount(PaginationRequestDto dto)
+        {
+            IQueryable<ConsultationRequest> query = _db.Set<ConsultationRequest>();
+
+            if (!string.IsNullOrWhiteSpace(dto.Status))
+            {
+                query = dto.Status switch
+                {
+                    "isStarred" => query.Where(r => r.IsStarred),
+                    "new"       => query.Where(r => !r.IsRead),
+                    _           => query
+                };
+            }
+
+            return await query.CountAsync();
         }
         
         public async Task<List<ConsultationRequest>> GetStarredConsultationRequests()

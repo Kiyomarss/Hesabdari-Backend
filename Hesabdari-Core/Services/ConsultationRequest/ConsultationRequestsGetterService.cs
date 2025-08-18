@@ -15,9 +15,11 @@ namespace Services
             _consultationRequestsRepository = consultationRequestsRepository;
         }
 
-        public virtual async Task<ItemsResult<ConsultationRequestResultDto>> GetConsultationRequests()
+        public virtual async Task<ItemsResult<ConsultationRequestResultDto>> GetConsultationRequests(PaginationRequestDto dto)
         {
-            var list = await _consultationRequestsRepository.GetConsultationRequests();
+            var list = await _consultationRequestsRepository.GetConsultationRequests(dto);
+            
+            var count = await _consultationRequestsRepository.GetConsultationRequestsCount(dto);
 
             var resultDtos = list
                        .Select(x => new ConsultationRequestResultDto(
@@ -34,7 +36,7 @@ namespace Services
                                                                     ))
                        .ToList();
 
-            return new ItemsResult<ConsultationRequestResultDto>(resultDtos);
+            return new ItemsResult<ConsultationRequestResultDto>(resultDtos, count);
         }
 
         public virtual async Task<ItemsResult<ConsultationRequestResultDto>> GetStarredConsultationRequests()

@@ -55,9 +55,9 @@ public class ConsultationRequestsController  : BaseController
 
     [HttpGet]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> GetConsultationRequests()
+    public async Task<IActionResult> GetConsultationRequests([FromQuery] PaginationRequestDto dto)
     {
-        var result = await _consultationRequestsGetterService.GetConsultationRequests();
+        var result = await _consultationRequestsGetterService.GetConsultationRequests(dto);
         return Ok(result);
     }
     

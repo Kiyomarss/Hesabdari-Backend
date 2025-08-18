@@ -12,3 +12,9 @@ public record ConsultationRequestResultDto(
     bool IsStarred,
     string CreateAt
 );
+
+public record PaginationRequestDto(
+    string? Status,
+    int Page = 1,
+    int PageSize = 10
+);

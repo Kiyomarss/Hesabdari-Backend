@@ -1,4 +1,5 @@
 using Hesabdari_Core.Domain.Entities;
+using Hesabdari_Core.DTO.ConsultationRequest;
 
 namespace RepositoryContracts;
 
@@ -8,8 +9,10 @@ public interface IConsultationRequestsRepository
 
     Task UpdateConsultationRequest();
 
-    Task<List<ConsultationRequest>> GetConsultationRequests();
+    Task<List<ConsultationRequest>> GetConsultationRequests(PaginationRequestDto dto);
 
+    Task<int> GetConsultationRequestsCount(PaginationRequestDto dto);
+    
     Task<List<ConsultationRequest>> GetStarredConsultationRequests();
 
     Task<int> GetUnreadCount();
