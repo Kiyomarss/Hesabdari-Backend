@@ -31,9 +31,9 @@ public class ConsultationRequestsController  : BaseController
     
     [HttpDelete]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Delete(IdListDto<long> dto)
+    public async Task<IActionResult> Delete(List<long> idList)
     {
-        await _consultationRequestsDeleterService.DeleteConsultationRequests(dto.IdList);
+        await _consultationRequestsDeleterService.DeleteConsultationRequests(idList);
         return Ok();
     }
     
@@ -71,7 +71,7 @@ public class ConsultationRequestsController  : BaseController
 
     [HttpGet]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> GetGetUnreadCount()
+    public async Task<IActionResult> GetUnreadCount()
     {
         var count = await _consultationRequestsGetterService.GetUnreadCount();
 
