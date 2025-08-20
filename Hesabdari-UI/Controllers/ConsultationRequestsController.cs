@@ -52,6 +52,14 @@ public class ConsultationRequestsController  : BaseController
         await _consultationRequestsUpdaterService.SetStarredStatus(id);
         return Ok();
     }
+    
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> MarkConsultationAsRead(long id)
+    {
+        await _consultationRequestsUpdaterService.MarkConsultationAsRead(id);
+        return Ok();
+    }
 
     [HttpGet]
     [Authorize(Roles = "Admin")]
