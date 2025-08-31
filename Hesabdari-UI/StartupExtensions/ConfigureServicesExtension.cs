@@ -94,10 +94,18 @@ namespace Hesabdari_UI
    {
     options.AddPolicy("AllowSpecificOrigin", builder =>
     {
-     builder.WithOrigins("http://localhost:5000", "http://localhost:3090", "http://localhost:5125")
-      .AllowAnyHeader()
-      .AllowAnyMethod()
-      .AllowCredentials();
+     builder.WithOrigins(
+                         "http://setareganpak.com",
+                         "https://setareganpak.com",
+                         "http://www.setareganpak.com",
+                         "https://www.setareganpak.com",
+                         "http://localhost:5000",
+                         "http://localhost:3090",
+                         "http://localhost:5125"
+                        )
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
    });
 
