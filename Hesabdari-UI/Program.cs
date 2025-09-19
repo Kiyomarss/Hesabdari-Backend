@@ -119,7 +119,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 
-app.UseCors("AllowSpecificOrigin");
+app.UseCors("AllowFrontends");
 app.UseAuthentication();
 app.UseAuthorization();
 

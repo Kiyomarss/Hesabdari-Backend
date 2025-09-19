@@ -92,7 +92,7 @@ namespace Hesabdari_UI
    
    services.AddCors(options =>
    {
-    options.AddPolicy("AllowSpecificOrigin", builder =>
+    options.AddPolicy("AllowFrontends", builder =>
     {
      builder.WithOrigins(
                          "http://setareganpak.com",
