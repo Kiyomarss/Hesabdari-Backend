@@ -69,6 +69,30 @@ namespace Hesabdari_UI
    services.AddScoped<ISettingGetterService, SettingGetterService>();
    services.AddScoped<ISettingUpdaterService, SettingUpdaterService>();
    
+   services.AddScoped<ICoursesRepository, CoursesRepository>();
+   services.AddScoped<ICoursesGetterService, CoursesGetterService>();
+   services.AddScoped<ICoursesDeleterService, CoursesDeleterService>();
+   services.AddScoped<ICoursesUpdaterService, CoursesUpdaterService>();
+   services.AddScoped<ICoursesAdderService, CoursesAdderService>();
+   
+   services.AddScoped<IChaptersRepository, ChaptersRepository>();
+   services.AddScoped<IChaptersGetterService, ChaptersGetterService>();
+   services.AddScoped<IChaptersDeleterService, ChaptersDeleterService>();
+   services.AddScoped<IChaptersUpdaterService, ChaptersUpdaterService>();
+   services.AddScoped<IChaptersAdderService, ChaptersAdderService>();
+   
+   services.AddScoped<ILessonsRepository, LessonsRepository>();
+   services.AddScoped<ILessonsGetterService, LessonsGetterService>();
+   services.AddScoped<ILessonsDeleterService, LessonsDeleterService>();
+   services.AddScoped<ILessonsUpdaterService, LessonsUpdaterService>();
+   services.AddScoped<ILessonsAdderService, LessonsAdderService>();
+   
+   services.AddScoped<IUserCoursesRepository, UserCoursesRepository>();
+   services.AddScoped<IUserCoursesGetterService, UserCoursesGetterService>();
+   services.AddScoped<IUserCoursesDeleterService, UserCoursesDeleterService>();
+   services.AddScoped<IUserCoursesUpdaterService, UserCoursesUpdaterService>();
+   services.AddScoped<IUserCoursesAdderService, UserCoursesAdderService>();
+   
    services.AddScoped<IImageStorageService, ImageStorageService>();
 
    services.AddDbContext<ApplicationDbContext>(options =>

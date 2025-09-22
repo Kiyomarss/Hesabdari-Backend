@@ -407,6 +407,145 @@ namespace Hesabdari_Infrastructure.Migrations
 
                     b.ToTable("Setting", (string)null);
                 });
+            
+                modelBuilder.Entity("Hesabdari_Core.Domain.Entities.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+                    
+                    b.Property<string>("ShortDescription")
+                     .IsRequired()
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("FullDescription")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(2000)");
+                    
+                    b.Property<long>("Price")
+                     .HasColumnType("bigint");
+                    
+                    b.Property<string>("ImageUrl")
+                     .HasColumnType("nvarchar(255)");
+                    
+                    b.Property<string>("IntroVideoUrl")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("IsActive")
+                     .IsRequired()
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateAt")
+                     .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                     .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses", (string)null);
+                });
+            
+                modelBuilder.Entity("Hesabdari_Core.Domain.Entities.Chapter", b =>
+                {
+                    b.Property<int>("Id")
+                     .ValueGeneratedOnAdd()
+                     .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("Order")
+                     .IsRequired()
+                     .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                     .IsRequired()
+                     .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FK_Chapters_Courses_Id");
+
+                    b.ToTable("Chapters", (string)null);
+                });
+
+                modelBuilder.Entity("Hesabdari_Core.Domain.Entities.Lesson", b =>
+                {
+                    b.Property<int>("Id")
+                     .ValueGeneratedOnAdd()
+                     .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("VideoUrl")
+                     .IsRequired()
+                     .HasColumnType("nvarchar(255)");
+
+                    b.Property<TimeSpan>("Duration")
+                     .IsRequired()
+                     .HasColumnType("time");
+
+                    b.Property<int>("Order")
+                     .IsRequired()
+                     .HasColumnType("int");
+
+                    b.Property<bool>("IsFree")
+                     .IsRequired()
+                     .HasColumnType("bit");
+
+                    b.Property<int>("ChapterId")
+                     .IsRequired()
+                     .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FK_Lessons_Chapter_Id");
+
+                    b.ToTable("Lessons", (string)null);
+                });
+                
+                modelBuilder.Entity("Hesabdari_Core.Domain.Entities.UserCourse", b =>
+                {
+                    b.Property<int>("Id")
+                     .ValueGeneratedOnAdd()
+                     .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("UserId")
+                     .IsRequired()
+                     .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CourseId")
+                     .IsRequired()
+                     .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FK_UserCourses_AspNetUsers_UserId");
+                    b.HasIndex("FK_UserCourses_Courses_CourseId");
+
+                    b.ToTable("UserCourses", (string)null);
+                });
+
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
