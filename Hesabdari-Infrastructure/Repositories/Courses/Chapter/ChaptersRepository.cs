@@ -23,6 +23,11 @@ namespace Repositories
             return chapter;
         }
 
+        public async Task<Chapter?> FindChapterById(int chapterId)
+        {
+            return await _db.Set<Chapter>().FindAsync(chapterId);
+        }
+        
         public Task UpdateChapter()
         {
             return _db.SaveChangesAsync();

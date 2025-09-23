@@ -4,8 +4,8 @@ namespace ServiceContracts
 {
     public interface ICoursesGetterService
     {
-        Task<ItemsResult<TestimonialResult>> GetTestimonials();
+        Task<ItemsResult<CourseSummaryDto>> GetCourses();
 
-        Task<ItemsResult<TestimonialDashboardResult>> GetDashboardTestimonials();
+        Task<ItemResult<CourseResultDto>> GetCourseById(int id);
     }
 }

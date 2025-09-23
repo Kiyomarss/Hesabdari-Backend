@@ -1,5 +1,6 @@
 using Hesabdari_Core.Domain.Entities;
 using Hesabdari_Core.DTO;
+using Hesabdari_Core.Utils;
 using Hesabdari_Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using RepositoryContracts;
@@ -43,6 +44,41 @@ namespace Repositories
                             .ToListAsync();
         }
         
+        public async Task<CourseResultDto> GetCourseByIdAsync(int courseId)
+        {
+            return await _db.Set<Course>()
+                            .Where(c => c.Id == courseId)
+                            .Select(c => new CourseResultDto
+                            {
+                                Id = c.Id,
+                                Title = c.Title,
+                                ShortDescription = c.ShortDescription,
+                                FullDescription = c.FullDescription,
+                                Price = c.Price,
+                                IntroVideoUrl = c.IntroVideoUrl,
+
+                                Chapters = c.Chapters
+                                            .OrderBy(ch => ch.Order)
+                                            .Select(ch => new ChapterResultDto
+                                            {
+                                                Id = ch.Id,
+                                                Title = ch.Title,
+                                                Order = ch.Order,
+
+                                                Lessons = ch.Lessons
+                                                            .OrderBy(l => l.Order)
+                                                            .Select(l => new LessonResultDto
+                                                            {
+                                                                Id = l.Id,
+                                                                Title = l.Title,
+                                                                Order = l.Order,
+                                                                VideoUrl = l.VideoUrl,
+                                                                Duration = l.Duration.ToDurationString()
+                                                            }).ToList()
+                                            }).ToList()
+                            })
+                            .FirstAsync();
+        }
         public async Task<Course?> FindCourseById(int courseId)
         {
             return await _db.Set<Course>()

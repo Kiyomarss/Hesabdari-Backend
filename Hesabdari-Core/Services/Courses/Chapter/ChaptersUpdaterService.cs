@@ -8,65 +8,29 @@ namespace Services
 {
     public class ChaptersUpdaterService : IChaptersUpdaterService
     {
-        private readonly ITestimonialsRepository _testimonialsRepository;
-        private readonly IImageStorageService _imageStorageService;
+        private readonly IChaptersRepository _chaptersRepository;
 
-        public ChaptersUpdaterService(
-            ITestimonialsRepository testimonialRepository,
-            IImageStorageService imageStorageService)
+        public ChaptersUpdaterService(IChaptersRepository chapterRepository)
         {
-            _testimonialsRepository = testimonialRepository;
-            _imageStorageService = imageStorageService;
+            _chaptersRepository = chapterRepository;
         }
 
-        public async Task<ItemResult<TestimonialResult>> UpdateTestimonial(TestimonialRequest testimonialUpdateRequest)
+        public async Task<ItemResult<ChapterResult>> UpdateChapter(ChapterRequest chapterUpdateRequest)
         {
-            if (testimonialUpdateRequest == null)
-                throw new InvalidOperationException("Testimonial with the given ID does not exist.");
+            if (chapterUpdateRequest == null)
+                throw new InvalidOperationException("Chapter with the given ID does not exist.");
 
-            var testimonial = await _testimonialsRepository.FindTestimonialById((int)testimonialUpdateRequest.Id);
+            var chapter = await _chaptersRepository.FindChapterById((int)chapterUpdateRequest.Id);
 
-            if (testimonial == null)
-                throw new InvalidOperationException("Testimonial with the given ID does not exist.");
+            if (chapter == null)
+                throw new InvalidOperationException("Chapter with the given ID does not exist.");
 
-            testimonial.PositionAndCompany = testimonialUpdateRequest.PositionAndCompany;
-            testimonial.Content = testimonialUpdateRequest.Content;
-            testimonial.Order = testimonialUpdateRequest.Order;
-            testimonial.IsActive = testimonialUpdateRequest.IsActive;
+            chapter.Title = chapterUpdateRequest.Title;
+            chapter.Order = chapterUpdateRequest.Order;
 
-            await _testimonialsRepository.UpdateTestimonial();
+            await _chaptersRepository.UpdateChapter();
 
-            return new ItemResult<TestimonialResult>(new TestimonialResult(testimonial.Id, testimonial.PositionAndCompany, testimonial.Content, testimonial.ImageUrl, testimonial.Order, testimonial.IsActive));
-        }
-
-        public async Task RemoveImageTestimonial(int testimonialId)
-        {
-            var testimonial = await _testimonialsRepository.FindTestimonialById(testimonialId);
-
-            if (testimonial == null)
-                throw new KeyNotFoundException($"testimonial with ID {testimonialId} does not exist.");
-
-            await _imageStorageService.DeleteOldImagesAsync(testimonial.ImageUrl);
-
-            testimonial.ImageUrl = null;
-
-            await _testimonialsRepository.UpdateTestimonial();
-        }
-        
-        public async Task<ItemResult<FileUpdateResult>> UpdateImageTestimonial(FileUploadDto dto)
-        {
-            var testimonial = await _testimonialsRepository.FindTestimonialById(dto.Id);
-
-            if (testimonial == null)
-                throw new KeyNotFoundException($"testimonial with ID {dto.Id} does not exist.");
-
-            await _imageStorageService.DeleteOldImagesAsync(testimonial.ImageUrl);
-
-            testimonial.ImageUrl = await _imageStorageService.SaveImageAsync(dto.Image);
-
-            await _testimonialsRepository.UpdateTestimonial();
-
-            return new ItemResult<FileUpdateResult>(new FileUpdateResult(testimonial.Id, testimonial.ImageUrl));
+            return new ItemResult<ChapterResult>(new ChapterResult(chapter.Id, chapter.Title, chapter.Order));
         }
     }
 }

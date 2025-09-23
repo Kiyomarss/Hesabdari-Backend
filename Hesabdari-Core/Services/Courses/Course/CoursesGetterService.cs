@@ -6,33 +6,26 @@ namespace Services
 {
     public class CoursesGetterService : ICoursesGetterService
     {
-        private readonly ITestimonialsRepository _testimonialsRepository;
+        private readonly ICoursesRepository _coursesRepository;
 
-        public CoursesGetterService(ITestimonialsRepository testimonialsRepository)
+        public CoursesGetterService(ICoursesRepository coursesRepository)
         {
-            _testimonialsRepository = testimonialsRepository;
+            _coursesRepository = coursesRepository;
         }
 
-        public virtual async Task<ItemsResult<TestimonialResult>> GetTestimonials()
+        public virtual async Task<ItemsResult<CourseSummaryDto>> GetCourses()
         {
-            var testimonials = await _testimonialsRepository.GetTestimonials();
+            var courses = await _coursesRepository.GetCoursesAsync();
 
-            return new ItemsResult<TestimonialResult>(
-                                                      testimonials.Select(x =>
-                                                                              new TestimonialResult(x.Id, x.PositionAndCompany, x.Content, x.ImageUrl, x.Order, x.IsActive)
-                                                                         ).ToList()
-                                                     );
+            return new ItemsResult<CourseSummaryDto>(courses);
         }
 
-        public virtual async Task<ItemsResult<TestimonialDashboardResult>> GetDashboardTestimonials()
+        public virtual async Task<ItemResult<CourseResultDto>> GetCourseById(int id)
         {
-            var testimonials = await _testimonialsRepository.GetDashboardTestimonials();
+            var courses = await _coursesRepository.GetCourseByIdAsync(id);
 
-            return new ItemsResult<TestimonialDashboardResult>(
-                                                               testimonials.Select(x =>
-                                                                                       new TestimonialDashboardResult(x.Id, x.PositionAndCompany, x.Content, x.ImageUrl, x.Order)
-                                                                                  ).ToList()
-                                                              );
+            return new ItemResult<CourseResultDto>(courses);
+
         }
     }
 }

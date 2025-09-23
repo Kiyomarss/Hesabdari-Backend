@@ -6,7 +6,8 @@ namespace RepositoryContracts;
 public interface IChaptersRepository
 {
     Task<Chapter> AddChapter(Chapter chapter);
-    
+
+    Task<Chapter?> FindChapterById(int chapterId);
     Task UpdateChapter();
     
     Task<bool> DeleteChapter(int chapterId);

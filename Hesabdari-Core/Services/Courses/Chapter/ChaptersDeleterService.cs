@@ -6,29 +6,21 @@ namespace Services
 {
     public class ChaptersDeleterService : IChaptersDeleterService
     {
-        private readonly ITestimonialsRepository _testimonialsRepository;
-        private readonly IImageStorageService _imageStorageService;
+        private readonly IChaptersRepository _chaptersRepository;
 
-        //constructor
-        public ChaptersDeleterService(
-            ITestimonialsRepository testimonialsRepository,
-            IImageStorageService imageStorageService
-        )
+        public ChaptersDeleterService(IChaptersRepository chaptersRepository)
         {
-            _testimonialsRepository = testimonialsRepository;
-            _imageStorageService = imageStorageService;
+            _chaptersRepository = chaptersRepository;
         }
 
-        public async Task DeleteTestimonial(int testimonialId)
+        public async Task DeleteChapter(int chapterId)
         {
-            var testimonial = await _testimonialsRepository.FindTestimonialById(testimonialId);
+            var chapter = await _chaptersRepository.FindChapterById(chapterId);
 
-            if (testimonial == null)
-                throw new KeyNotFoundException($"testimonial with ID {testimonialId} does not exist.");
-
-            await _imageStorageService.DeleteOldImagesAsync(testimonial.ImageUrl);
-
-            await _testimonialsRepository.DeleteTestimonial(testimonialId);
+            if (chapter == null)
+                throw new KeyNotFoundException($"chapter with ID {chapterId} does not exist.");
+            
+            await _chaptersRepository.DeleteChapter(chapterId);
         }
     }
 }

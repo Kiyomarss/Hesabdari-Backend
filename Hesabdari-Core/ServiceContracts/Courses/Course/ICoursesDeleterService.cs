@@ -2,6 +2,6 @@
 {
     public interface ICoursesDeleterService
     {
-        Task DeleteTestimonial(int testimonialId);
+        Task DeleteCourse(int courseId);
     }    
 }

@@ -4,8 +4,5 @@ namespace ServiceContracts
 {
     public interface IChaptersGetterService
     {
-        Task<ItemsResult<TestimonialResult>> GetTestimonials();
-
-        Task<ItemsResult<TestimonialDashboardResult>> GetDashboardTestimonials();
     }
 }

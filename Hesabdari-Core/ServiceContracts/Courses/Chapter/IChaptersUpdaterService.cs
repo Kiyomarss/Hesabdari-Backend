@@ -5,10 +5,6 @@ namespace ServiceContracts
 {
     public interface IChaptersUpdaterService
     {
-        Task<ItemResult<TestimonialResult>> UpdateTestimonial(TestimonialRequest testimonialUpdateRequest);
-
-        Task RemoveImageTestimonial(int testimonialId);
-
-        Task<ItemResult<FileUpdateResult>> UpdateImageTestimonial(FileUploadDto dto);
+        Task<ItemResult<ChapterResult>> UpdateChapter(ChapterRequest chapterUpdateRequest);
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IChaptersDeleterService
     {
-        Task DeleteTestimonial(int testimonialId);
+        Task DeleteChapter(int chapterId);
     }    
 }

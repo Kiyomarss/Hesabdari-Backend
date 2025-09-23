@@ -13,5 +13,7 @@ public interface ICoursesRepository
 
     Task<List<CourseSummaryDto>> GetCoursesAsync();
 
+    Task<CourseResultDto> GetCourseByIdAsync(int courseId);
+    
     Task<bool> DeleteCourse(int courseId);
 }
