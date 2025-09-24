@@ -5,10 +5,13 @@ namespace ServiceContracts
 {
     public interface ICoursesUpdaterService
     {
-        Task<ItemResult<TestimonialResult>> UpdateTestimonial(TestimonialRequest testimonialUpdateRequest);
+        Task<ItemResult<CourseResult>> UpdateCourse(CourseRequest courseUpdateRequest);
+        Task RemoveImageCourse(int courseId);
+        
+        Task<ItemResult<FileUpdateResult>> UpdateImageCourse(FileUploadDto dto);
 
-        Task RemoveImageTestimonial(int testimonialId);
+        Task RemoveVideoCourse(int courseId);
 
-        Task<ItemResult<FileUpdateResult>> UpdateImageTestimonial(FileUploadDto dto);
+        Task<ItemResult<FileUpdateResult>> UpdateVideoCourse(FileUploadDto dto);
     }
 }

@@ -8,65 +8,101 @@ namespace Services
 {
     public class CoursesUpdaterService : ICoursesUpdaterService
     {
-        private readonly ITestimonialsRepository _testimonialsRepository;
+        private readonly ICoursesRepository _coursesRepository;
         private readonly IImageStorageService _imageStorageService;
+        private readonly IVideoStorageService _videoStorageService;
 
         public CoursesUpdaterService(
-            ITestimonialsRepository testimonialRepository,
-            IImageStorageService imageStorageService)
+            ICoursesRepository courseRepository,
+            IImageStorageService imageStorageService,
+            IVideoStorageService videoStorageService
+        )
         {
-            _testimonialsRepository = testimonialRepository;
+            _coursesRepository = courseRepository;
             _imageStorageService = imageStorageService;
+            _videoStorageService = videoStorageService;
         }
 
-        public async Task<ItemResult<TestimonialResult>> UpdateTestimonial(TestimonialRequest testimonialUpdateRequest)
+        public async Task<ItemResult<CourseResult>> UpdateCourse(CourseRequest courseUpdateRequest)
         {
-            if (testimonialUpdateRequest == null)
-                throw new InvalidOperationException("Testimonial with the given ID does not exist.");
+            if (courseUpdateRequest == null)
+                throw new InvalidOperationException("Course with the given ID does not exist.");
 
-            var testimonial = await _testimonialsRepository.FindTestimonialById((int)testimonialUpdateRequest.Id);
+            var course = await _coursesRepository.FindCourseById((int)courseUpdateRequest.Id);
 
-            if (testimonial == null)
-                throw new InvalidOperationException("Testimonial with the given ID does not exist.");
+            if (course == null)
+                throw new InvalidOperationException("Course with the given ID does not exist.");
 
-            testimonial.PositionAndCompany = testimonialUpdateRequest.PositionAndCompany;
-            testimonial.Content = testimonialUpdateRequest.Content;
-            testimonial.Order = testimonialUpdateRequest.Order;
-            testimonial.IsActive = testimonialUpdateRequest.IsActive;
+            course.Title = courseUpdateRequest.Title;
+            course.ShortDescription = courseUpdateRequest.ShortDescription;
+            course.FullDescription = courseUpdateRequest.FullDescription;
+            course.Price = courseUpdateRequest.Price;
+            course.Order = courseUpdateRequest.Order;
+            course.IsActive = courseUpdateRequest.IsActive;
 
-            await _testimonialsRepository.UpdateTestimonial();
+            await _coursesRepository.UpdateCourse();
 
-            return new ItemResult<TestimonialResult>(new TestimonialResult(testimonial.Id, testimonial.PositionAndCompany, testimonial.Content, testimonial.ImageUrl, testimonial.Order, testimonial.IsActive));
+            return new ItemResult<CourseResult>(new CourseResult(course.Id, course.Title, course.ShortDescription, course.FullDescription, course.Price, course.Order, course.IsActive));
         }
 
-        public async Task RemoveImageTestimonial(int testimonialId)
+        public async Task RemoveImageCourse(int courseId)
         {
-            var testimonial = await _testimonialsRepository.FindTestimonialById(testimonialId);
+            var course = await _coursesRepository.FindCourseById(courseId);
 
-            if (testimonial == null)
-                throw new KeyNotFoundException($"testimonial with ID {testimonialId} does not exist.");
+            if (course == null)
+                throw new KeyNotFoundException($"course with ID {courseId} does not exist.");
 
-            await _imageStorageService.DeleteOldImagesAsync(testimonial.ImageUrl);
+            await _imageStorageService.DeleteOldImagesAsync(course.ImageUrl);
 
-            testimonial.ImageUrl = null;
+            course.ImageUrl = null;
 
-            await _testimonialsRepository.UpdateTestimonial();
+            await _coursesRepository.UpdateCourse();
         }
-        
-        public async Task<ItemResult<FileUpdateResult>> UpdateImageTestimonial(FileUploadDto dto)
+
+        public async Task<ItemResult<FileUpdateResult>> UpdateImageCourse(FileUploadDto dto)
         {
-            var testimonial = await _testimonialsRepository.FindTestimonialById(dto.Id);
+            var course = await _coursesRepository.FindCourseById(dto.Id);
 
-            if (testimonial == null)
-                throw new KeyNotFoundException($"testimonial with ID {dto.Id} does not exist.");
+            if (course == null)
+                throw new KeyNotFoundException($"course with ID {dto.Id} does not exist.");
 
-            await _imageStorageService.DeleteOldImagesAsync(testimonial.ImageUrl);
+            await _imageStorageService.DeleteOldImagesAsync(course.ImageUrl);
 
-            testimonial.ImageUrl = await _imageStorageService.SaveImageAsync(dto.Image);
+            course.ImageUrl = await _imageStorageService.SaveImageAsync(dto.Image);
 
-            await _testimonialsRepository.UpdateTestimonial();
+            await _coursesRepository.UpdateCourse();
 
-            return new ItemResult<FileUpdateResult>(new FileUpdateResult(testimonial.Id, testimonial.ImageUrl));
+            return new ItemResult<FileUpdateResult>(new FileUpdateResult(course.Id, course.ImageUrl));
+        }
+
+        public async Task RemoveVideoCourse(int courseId)
+        {
+            var course = await _coursesRepository.FindCourseById(courseId);
+
+            if (course == null)
+                throw new KeyNotFoundException($"course with ID {courseId} does not exist.");
+
+            await _videoStorageService.DeleteOldVideosAsync(course.IntroVideoUrl);
+
+            course.IntroVideoUrl = null;
+
+            await _coursesRepository.UpdateCourse();
+        }
+
+        public async Task<ItemResult<FileUpdateResult>> UpdateVideoCourse(FileUploadDto dto)
+        {
+            var course = await _coursesRepository.FindCourseById(dto.Id);
+
+            if (course == null)
+                throw new KeyNotFoundException($"course with ID {dto.Id} does not exist.");
+
+            await _videoStorageService.DeleteOldVideosAsync(course.IntroVideoUrl);
+
+            course.IntroVideoUrl = await _videoStorageService.SaveVideoAsync(dto.Image);
+
+            await _coursesRepository.UpdateCourse();
+
+            return new ItemResult<FileUpdateResult>(new FileUpdateResult(course.Id, course.ImageUrl));
         }
     }
 }
