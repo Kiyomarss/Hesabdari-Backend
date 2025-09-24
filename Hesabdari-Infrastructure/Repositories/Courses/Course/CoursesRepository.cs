@@ -44,6 +44,21 @@ namespace Repositories
                             .ToListAsync();
         }
         
+        public async Task<List<CourseSummaryDto>> GetCoursesAsync(List<int> courseIds)
+        {
+            return await _db.Set<Course>()
+                            .Where(c => courseIds.Contains(c.Id))
+                            .Select(c => new CourseSummaryDto
+                            {
+                                Id = c.Id,
+                                Title = c.Title,
+                                ShortDescription = c.ShortDescription,
+                                Price = c.Price,
+                                ImageUrl = c.ImageUrl
+                            })
+                            .ToListAsync();
+        }
+        
         public async Task<CourseResultDto> GetCourseByIdAsync(int courseId)
         {
             return await _db.Set<Course>()

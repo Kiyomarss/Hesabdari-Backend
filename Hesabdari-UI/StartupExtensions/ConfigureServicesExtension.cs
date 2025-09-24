@@ -90,7 +90,6 @@ namespace Hesabdari_UI
    services.AddScoped<IUserCoursesRepository, UserCoursesRepository>();
    services.AddScoped<IUserCoursesGetterService, UserCoursesGetterService>();
    services.AddScoped<IUserCoursesDeleterService, UserCoursesDeleterService>();
-   services.AddScoped<IUserCoursesUpdaterService, UserCoursesUpdaterService>();
    services.AddScoped<IUserCoursesAdderService, UserCoursesAdderService>();
    
    services.AddScoped<IImageStorageService, ImageStorageService>();

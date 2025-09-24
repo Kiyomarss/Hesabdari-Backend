@@ -1,4 +1,5 @@
-﻿using Hesabdari_Core.ServiceContracts.Storage;
+﻿using Hesabdari_Core.ServiceContracts;
+using Hesabdari_Core.ServiceContracts.Storage;
 using ServiceContracts;
 using RepositoryContracts;
 
@@ -6,29 +7,28 @@ namespace Services
 {
     public class UserCoursesDeleterService : IUserCoursesDeleterService
     {
-        private readonly ITestimonialsRepository _testimonialsRepository;
-        private readonly IImageStorageService _imageStorageService;
+        private readonly IUserCoursesRepository _userCoursesRepository;
+        private readonly IIdentityService _identityService;
 
-        //constructor
         public UserCoursesDeleterService(
-            ITestimonialsRepository testimonialsRepository,
-            IImageStorageService imageStorageService
+            IUserCoursesRepository userCoursesRepository,
+            IIdentityService identityService
         )
         {
-            _testimonialsRepository = testimonialsRepository;
-            _imageStorageService = imageStorageService;
+            _userCoursesRepository = userCoursesRepository;
+            _identityService = identityService;
         }
 
-        public async Task DeleteTestimonial(int testimonialId)
+        public async Task DeleteUserCourse(int courseId)
         {
-            var testimonial = await _testimonialsRepository.FindTestimonialById(testimonialId);
+            var currentUser = await _identityService.GetCurrentUserAsync();
+            
+            var userCourse = await _userCoursesRepository.FindUserCourse(courseId, currentUser.Id);
 
-            if (testimonial == null)
-                throw new KeyNotFoundException($"testimonial with ID {testimonialId} does not exist.");
+            if (userCourse == null)
+                throw new KeyNotFoundException($"userCourse with ID {courseId} does not exist.");
 
-            await _imageStorageService.DeleteOldImagesAsync(testimonial.ImageUrl);
-
-            await _testimonialsRepository.DeleteTestimonial(testimonialId);
+            await _userCoursesRepository.DeleteUserCourseAsync(userCourse.Id);
         }
     }
 }

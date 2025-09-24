@@ -1,5 +1,6 @@
 ﻿using Hesabdari_Core.Domain.Entities;
 using Hesabdari_Core.DTO;
+using Hesabdari_Core.ServiceContracts;
 using Hesabdari_Core.ServiceContracts.Storage;
 using ServiceContracts;
 using RepositoryContracts;
@@ -8,30 +9,29 @@ namespace Services
 {
     public class UserCoursesAdderService : IUserCoursesAdderService
     {
-        private readonly ITestimonialsRepository _testimonialsRepository;
-        private readonly IImageStorageService _imageStorageService;
+        private readonly IUserCoursesRepository _userCoursesRepository;
+        private readonly IIdentityService _identityService;
 
         public UserCoursesAdderService(
-            ITestimonialsRepository testimonialsRepository,
-            IImageStorageService imageStorageService
+            IUserCoursesRepository userCoursesRepository,
+            IIdentityService identityService
         )
         {
-            _testimonialsRepository = testimonialsRepository;
-            _imageStorageService = imageStorageService;
+            _userCoursesRepository = userCoursesRepository;
+            _identityService = identityService;
         }
 
-        public async Task<ItemResult<TestimonialResult>> AddTestimonial(TestimonialRequest testimonialAddRequest)
+        public async Task AddUserCourse(int courseId)
         {
-            var testimonial = new Testimonial();
+            var currentUser = await _identityService.GetCurrentUserAsync();
 
-            testimonial.PositionAndCompany = testimonialAddRequest.PositionAndCompany;
-            testimonial.Content = testimonialAddRequest.Content;
-            testimonial.Order = testimonialAddRequest.Order;
-            testimonial.IsActive = testimonialAddRequest.IsActive;
+            var userCourse = new UserCourse
+            {
+                UserId = currentUser.Id,
+                CourseId = courseId
+            };
 
-            await _testimonialsRepository.AddTestimonial(testimonial);
-
-            return new ItemResult<TestimonialResult>(new TestimonialResult(testimonial.Id, testimonial.PositionAndCompany, testimonial.Content, testimonial.ImageUrl, testimonial.Order, testimonial.IsActive));
+            await _userCoursesRepository.AddUserCourse(userCourse);
         }
     }
 }

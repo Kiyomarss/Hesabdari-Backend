@@ -1,38 +1,28 @@
 using ServiceContracts;
 using Hesabdari_Core.DTO;
+using Hesabdari_Core.ServiceContracts;
 using RepositoryContracts;
 
 namespace Services
 {
     public class UserCoursesGetterService : IUserCoursesGetterService
     {
-        private readonly ITestimonialsRepository _testimonialsRepository;
+        private readonly IUserCoursesRepository _userCoursesRepository;
+        private readonly IIdentityService _identityService;
 
-        public UserCoursesGetterService(ITestimonialsRepository testimonialsRepository)
+        public UserCoursesGetterService(
+            IUserCoursesRepository userCoursesRepository,
+            IIdentityService identityService)
         {
-            _testimonialsRepository = testimonialsRepository;
+            _userCoursesRepository = userCoursesRepository;
+            _identityService = identityService;
         }
-
-        public virtual async Task<ItemsResult<TestimonialResult>> GetTestimonials()
+        
+        public virtual async Task<List<CourseSummaryDto>> FindCourseIdsByUserId()
         {
-            var testimonials = await _testimonialsRepository.GetTestimonials();
-
-            return new ItemsResult<TestimonialResult>(
-                                                      testimonials.Select(x =>
-                                                                              new TestimonialResult(x.Id, x.PositionAndCompany, x.Content, x.ImageUrl, x.Order, x.IsActive)
-                                                                         ).ToList()
-                                                     );
+            var currentUser = await _identityService.GetCurrentUserAsync();
+            
+            return await _userCoursesRepository.FindCourseIdsByUserId(currentUser.Id);
         }
-
-        public virtual async Task<ItemsResult<TestimonialDashboardResult>> GetDashboardTestimonials()
-        {
-            var testimonials = await _testimonialsRepository.GetDashboardTestimonials();
-
-            return new ItemsResult<TestimonialDashboardResult>(
-                                                               testimonials.Select(x =>
-                                                                                       new TestimonialDashboardResult(x.Id, x.PositionAndCompany, x.Content, x.ImageUrl, x.Order)
-                                                                                  ).ToList()
-                                                              );
-        }
-    }
+}
 }
