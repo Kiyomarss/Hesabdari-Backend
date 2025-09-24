@@ -4,5 +4,6 @@ namespace ServiceContracts
 {
     public interface IChaptersAdderService
     {
+        Task<ItemResult<ChapterResult>> AddChapter(ChapterRequest chapterAddRequest);
     }
 }
