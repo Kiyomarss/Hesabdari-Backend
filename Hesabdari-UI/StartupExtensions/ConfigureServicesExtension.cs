@@ -93,6 +93,7 @@ namespace Hesabdari_UI
    services.AddScoped<IUserCoursesAdderService, UserCoursesAdderService>();
    
    services.AddScoped<IImageStorageService, ImageStorageService>();
+   services.AddScoped<IVideoStorageService, VideoStorageService>();
 
    services.AddDbContext<ApplicationDbContext>(options =>
    {

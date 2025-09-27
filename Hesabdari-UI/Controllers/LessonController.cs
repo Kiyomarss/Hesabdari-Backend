@@ -49,14 +49,14 @@ public class LessonController  : BaseController
     
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> RemoveImageLesson(int id)
+    public async Task<IActionResult> RemoveVideoLesson(int id)
     {
         await _lessonsesUpdaterService.RemoveVideoLesson(id);
         return Ok();
     }
     
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> UpdateImageLesson([FromForm] FileUploadDto dto)
+    public async Task<IActionResult> UpdateVideoLesson([FromForm] FileUploadDto dto)
     {
         var result = await _lessonsesUpdaterService.UpdateVideoLesson(dto);
 
