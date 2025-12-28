@@ -21,5 +21,4 @@ public class UpdateAvatarRequest
 
 public record UpdatePersonNameRequest(string NewPersonName);
 
-
 public record UserDto(string FullName, string Email, string? AvatarPath);
